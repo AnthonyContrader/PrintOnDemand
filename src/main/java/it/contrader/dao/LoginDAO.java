@@ -1,5 +1,5 @@
 package it.contrader.dao;
-
+import it.contrader.controller.Request;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ public class LoginDAO {
 	private final String QUERY_LOGIN = "SELECT * FROM user WHERE username = ? AND password = ?";
 
 	
-	public String login (String username, String password) {
+	public Request login (String username, String password) {
 
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
@@ -28,6 +28,7 @@ public class LoginDAO {
 			statement.setString(2, password);
 
 			String usertype = null;
+			int id=0;
 			
 			ResultSet resultSet;
 			
@@ -35,9 +36,12 @@ public class LoginDAO {
 				resultSet = statement.executeQuery();
 				resultSet.next();
 				usertype = resultSet.getString("usertype");
+				id=resultSet.getInt("id");
 			}
-
-			return usertype;
+			Request infos=new Request();
+			infos.put("usertype", usertype);
+			infos.put("id", id);
+			return infos;
 		}
 		
 		catch (SQLException e) {

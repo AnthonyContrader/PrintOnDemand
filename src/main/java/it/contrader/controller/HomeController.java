@@ -4,7 +4,7 @@ import it.contrader.main.MainDispatcher;
 import it.contrader.service.LoginService;
 
 public class HomeController implements Controller {
-
+	
 	private LoginService loginService;
 /**
  * Istanzia un oggetto di classe LoginService tramite il costruttore della classe
@@ -24,8 +24,8 @@ public class HomeController implements Controller {
 			String password = request.get("password").toString();
 
 			// Qui invoca il Login Service
-			String usertype= loginService.login(username, password);
-
+			Request status= loginService.login(username, password);
+			String usertype=status.get("usertype").toString();
 			// Reindirizza alla giusta view in base allo usertype
 			switch(usertype) {
 			
@@ -33,7 +33,8 @@ public class HomeController implements Controller {
 				MainDispatcher.getInstance().callView("HomeAdmin", request);
 				break;
 				
-			case "USER": 
+			case "USER":
+				request.put("userid", status.get("id"));
 				MainDispatcher.getInstance().callView("HomeUser", request);
 				break;
 			

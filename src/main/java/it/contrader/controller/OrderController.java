@@ -1,12 +1,13 @@
 package it.contrader.controller;
 
+
 import java.util.List;
 
-
+import it.contrader.dto.ItemDTO;
+import it.contrader.dto.OrderDTO;
 import it.contrader.dto.UserDTO;
-//import it.contrader.dto.ItemDTO;
 import it.contrader.main.MainDispatcher;
-import it.contrader.service.UserService;
+import it.contrader.service.OrderService;
 
 /**
  * 
@@ -14,83 +15,86 @@ import it.contrader.service.UserService;
  *
  *Si osservi che nel Controller compaiono solo oggetti del DTO e non del Model!
  */
-public class UserController implements Controller {
+public class OrderController implements Controller {
 
 	/**
 	 * definisce il pacchetto di vista user.
 	 */
-	private static String sub_package = "user.";
+	private static String sub_package = "order.";
 	
-	private UserService userService;
+	private OrderService orderService;
 	/**
 	 * Costruisce un oggetto di tipo UserService per poterne usare i metodi
 	 */
-	public UserController() {
-		this.userService = new UserService();
+	public OrderController() {
+		this.orderService = new OrderService();
 	}
 	
-	
-	
-	/**
-	 * Metodo dell'interfaccia Controller. Estrae dalla request la mode
-	 * (che riceve dalle view specifiche e può essere la richesta di una 
-	 * scelta da parte dell'utente "GETCHOICE") e la scelta dell'utente.
-	 * 
-	 * Se la modalità corrisponde ad una CRUD il controller chiama i service,
-	 * altrimenti rimanda alla View della CRUD per richiedere i parametri
-	 */
-	@Override
-	public void doControl(Request request) {
+public void doControl(Request request) {
 		
 		//Estrae dalla request mode e choice
 		String mode = (String) request.get("mode");
-		
 		String choice = (String) request.get("choice");
 
 		//Definisce i campi della classe (serviranno sempre, tanto vale definirli una sola volta)
-		int id;
-		String username;
-		String password;
-		String usertype;
-
+		 int idclient;
+		 int iditem;
+		 int idorder;
+		 int prezzo;
+		 String data,immagine,link;
+		 
+		
 		switch (mode) {
 		
 		// Arriva qui dalla UserReadView. Invoca il Service con il parametro id e invia alla UserReadView uno user da mostrare 
 		case "READ":
-			id = Integer.parseInt(request.get("id").toString());
-			UserDTO userDTO = userService.read(id);
-			request.put("user", userDTO);
-			MainDispatcher.getInstance().callView(sub_package + "UserRead", request);
+			idorder = Integer.parseInt(request.get("id").toString());
+			List<OrderDTO> orderDTO = orderService.read(idorder);
+			request.put("order", orderDTO);
+			MainDispatcher.getInstance().callView(sub_package + "OrderRead", request);
 			break;
 		
-		// Arriva qui dalla UserInsertView. Estrae i parametri da inserire e chiama il service per inserire uno user con questi parametri
+		// Arriva qui dalla OrderInsertView. Estrae i parametri da inserire e chiama il service per inserire uno user con questi parametri
 		case "INSERT":
-			username = request.get("username").toString();
-			password = request.get("password").toString();
-			usertype = request.get("usertype").toString();
 			
-			//costruisce l'oggetto user da inserire
-			UserDTO usertoinsert = new UserDTO(username, password, usertype);
+			idclient = Integer.parseInt(request.get("IDclient").toString());
+			iditem = Integer.parseInt(request.get("IDitem").toString());
+			//idorder = Integer.parseInt(request.get("IDorder").toString());
+			prezzo = Integer.parseInt(request.get("prezzo").toString());
+			//data = request.get("data").toString();
+			immagine=request.get("immagine").toString();
+			link=request.get("link").toString();
+			
+			
+			
+			//costruisce l'oggetto order da inserire
+			OrderDTO orderToInsert = new OrderDTO(idclient,iditem,"0",prezzo,0);
+			
+			ItemDTO itemToInsert = new ItemDTO("0","0","0",0,"0",immagine,link,iditem);
 			//invoca il service
-			userService.insert(usertoinsert);
+			
+			orderService.insert(orderToInsert,itemToInsert);
 			request = new Request();
 			request.put("mode", "mode");
 			//Rimanda alla view con la risposta
-			MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
+			MainDispatcher.getInstance().callView(sub_package + "OrderInsert", request);
 			break;
 		
 		// Arriva qui dalla UserDeleteView. Estrae l'id dell'utente da cancellare e lo passa al Service
-		case "DELETE":
+			
+			//la cancellazione abbiamo detto che non la puo fare l'utente ma solo admin giusto?
+			
+		/*case "DELETE":
 			id = Integer.parseInt(request.get("id").toString());
 			//Qui chiama il service
 			userService.delete(id);
 			request = new Request();
 			request.put("mode", "mode");
 			MainDispatcher.getInstance().callView(sub_package + "UserDelete", request);
-			break;
+			break;*/ 
 		
 		// Arriva qui dalla UserUpdateView
-		case "UPDATE":
+		/*case "UPDATE":
 			id = Integer.parseInt(request.get("id").toString());
 			username = request.get("username").toString();
 			password = request.get("password").toString();
@@ -101,14 +105,17 @@ public class UserController implements Controller {
 			request = new Request();
 			request.put("mode", "mode");
 			MainDispatcher.getInstance().callView(sub_package + "UserUpdate", request);
-			break;
+			break;*/
 			
 		//Arriva qui dalla UserView Invoca il Service e invia alla UserView il risultato da mostrare 
-		case "USERLIST":
-			List<UserDTO> usersDTO = userService.getAll();
+		case "ORDERLIST":
+			
+			List<OrderDTO> ordersDTO = orderService.getAll();
 			//Impacchetta la request con la lista degli user
-			request.put("users", usersDTO);
-			MainDispatcher.getInstance().callView("User", request);
+			
+			request.put("orders", ordersDTO);
+			
+			MainDispatcher.getInstance().callView("Order", request);
 			break;
 			
 		
@@ -122,31 +129,27 @@ public class UserController implements Controller {
 			switch (choice.toUpperCase()) {
 			
 			case "L":
-				MainDispatcher.getInstance().callView(sub_package + "UserRead", null);
+				MainDispatcher.getInstance().callView(sub_package + "OrderRead", null);
 				break;
 				
 			case "I":
-				MainDispatcher.getInstance().callView(sub_package + "UserInsert", null);
+				MainDispatcher.getInstance().callView(sub_package + "OrderInsert", null);
 				break;
 				
-			case "R":
-				MainDispatcher.getInstance().callView(sub_package + "UserInsert", null);
-				break;
-				
-			case "M":
+			/*case "M":
 				MainDispatcher.getInstance().callView(sub_package + "UserUpdate", null);
-				break;
+				break;*/
 				
 			case "C":
-				MainDispatcher.getInstance().callView(sub_package + "UserDelete", null);
+				MainDispatcher.getInstance().callView(sub_package + "OrderDelete", null);
 				break;
 				
-			//case "O":
-				//MainDispatcher.getInstance().callView(sub_package + "UserOrder", null);
-				//break;
+			/*case "O":
+				MainDispatcher.getInstance().callView(sub_package + "OrderOrder", null);
+				break;*/
 				
 			case "E":
-				MainDispatcher.getInstance().callView("Login", null);
+				MainDispatcher.getInstance().callView("Register", null);
 				break;
 
 			case "B":

@@ -35,7 +35,7 @@ public class Request {
 	/*
 	 * metodo get
 	 * parametri: String key : la chiave di cui voglio recuperare i valore associato
-	 * output: Object : l'output sarà l'oggetto associato alal chiave dovrò quindi eseguire in fase di richiamo il giusto cast in 
+	 * output: Object : l'output sarà l'oggetto associato alla chiave dovrò quindi eseguire in fase di richiamo il giusto cast in 
 	 * 					modo da non perdere informazioni
 	 */
 	public Object get(String key){

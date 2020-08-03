@@ -31,7 +31,8 @@ public class UserService {
 		// Ottiene una lista di entità e le restituisce convertendole in DTO
 		return userConverter.toDTOList(userDAO.getAll());
 	}
-
+	
+	
 
 	public UserDTO read(int id) {
 		// Ottiene un'entità e la restituisce convertendola in DTO
@@ -52,7 +53,7 @@ public class UserService {
 
 
 	public boolean delete(int id) {
-		// Questo mtodo chiama direttamente il DAO
+		// Questo metodo chiama direttamente il DAO
 		return userDAO.delete(id);
 	}
 	

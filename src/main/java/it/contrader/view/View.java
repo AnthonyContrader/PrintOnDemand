@@ -25,4 +25,7 @@ public interface View {
 	 * 				il controller che implementa la logica necessaria.
 	 */
 	public void submit();
+	
+	//metodo che prende l'input appena inserito da console
+	public String getInput();
 }

@@ -13,6 +13,7 @@ import it.contrader.model.User;
  *Per i dettagli della classe vedi Guida sez 6: DAO
  */
 public class UserDAO {
+	private String user="user";
 
 	private final String QUERY_ALL = "SELECT * FROM user";
 	private final String QUERY_CREATE = "INSERT INTO user (username, password, usertype) VALUES (?,?,?)";

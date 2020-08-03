@@ -3,7 +3,7 @@ package it.contrader.view;
 import java.util.List;
 
 import it.contrader.controller.Request;
-import it.contrader.dto.UserDTO;
+import it.contrader.dto.OrderDTO;
 import it.contrader.main.MainDispatcher;
 
 
@@ -13,12 +13,12 @@ import it.contrader.main.MainDispatcher;
  *
  * Si osservi che alla View arrivano solo oggetti di tipo DTO!
  */
-public class UserView extends AbstractView {
+public class OrderView extends AbstractView {
 
 	private Request request;
 	private String choice;
 
-	public UserView() {
+	public OrderView() {
 		
 	}
 
@@ -28,13 +28,13 @@ public class UserView extends AbstractView {
 	@Override
 	public void showResults(Request request) {
 		if (request != null) {
-			System.out.println("\n------------------- Gestione utenti ----------------\n");
-			System.out.println("ID\tUsername\tPassword\tTipo Utente");
-			System.out.println("----------------------------------------------------\n");
+			System.out.println("\n----------------------------- Gestione utenti --------------------------\n");
+			System.out.println("IDClient\tIDItem\tData\tPrezzo\tIDOrdine");
+			System.out.println("------------------------------------------------------------------------\n");
 			
 			@SuppressWarnings("unchecked")
-			List<UserDTO> users = (List<UserDTO>) request.get("users");
-			for (UserDTO u: users)
+			List<OrderDTO> order = (List<OrderDTO>) request.get("orders");
+			for (OrderDTO u: order)
 				System.out.println(u);
 			System.out.println();
 		}
@@ -47,7 +47,7 @@ public class UserView extends AbstractView {
 	@Override
 	public void showOptions() {
 		System.out.println("          Scegli l'operazione da effettuare:");
-		System.out.println("[L]eggi [I]nserisci  [O]rdina [M]odifica [C]ancella [B]ack [E]sci");
+		System.out.println("[L]eggi [I]nserisci  [C]ancella [B]ack [E]sci");
 
 		this.choice = getInput();
 
@@ -62,7 +62,7 @@ public class UserView extends AbstractView {
 		request = new Request();
 		request.put("choice", choice);
 		request.put("mode", "GETCHOICE");
-		MainDispatcher.getInstance().callAction("User", "doControl", this.request);
+		MainDispatcher.getInstance().callAction("Order", "doControl", this.request);
 	}
 
 }

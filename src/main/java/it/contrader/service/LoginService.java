@@ -1,9 +1,9 @@
 package it.contrader.service;
 
+import it.contrader.controller.Request;
 import it.contrader.dao.LoginDAO;
 
 public class LoginService {
-
 	private LoginDAO loginDAO;
 	/**
 	 * Costruttore della classe, crea un oggetto di tipo LoginDAO per poter chiamare il metodo del DAO
@@ -15,7 +15,8 @@ public class LoginService {
 	/**
 	 * Chiama il metodo del DAO e ottiene una stringa (lo usertype)
 	 */
-	public String login (String username, String password) {
+	public Request login (String username, String password) {
 		return this.loginDAO.login(username, password);
+		
 	}
 }

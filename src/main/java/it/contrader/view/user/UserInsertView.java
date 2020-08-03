@@ -23,7 +23,7 @@ public class UserInsertView extends AbstractView{
 	public void showResults(Request request) {
 		if (request!=null) {
 			System.out.println("Inserimento andato a buon fine.\n");
-			MainDispatcher.getInstance().callView("User", null);
+			MainDispatcher.getInstance().callView("Register", null);
 		}
 	}
 
@@ -36,8 +36,7 @@ public class UserInsertView extends AbstractView{
 			username = getInput();
 			System.out.println("Inserisci password dell'utente:");
 			password = getInput();
-			System.out.println("Inserisci tipo dell'utente:");
-			usertype = getInput();
+			usertype = "USER";
 	}
 
 	/**
