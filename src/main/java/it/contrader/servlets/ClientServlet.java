@@ -41,7 +41,7 @@ public class ClientServlet extends HttpServlet {
 			break;
 
 		case "READ":
-			id = Integer.parseInt(request.getParameter("id"));
+			id = Integer.parseInt(request.getParameter("idclient"));
 			dto = service.read(id);
 			request.setAttribute("dto", dto);
 			
@@ -82,7 +82,7 @@ public class ClientServlet extends HttpServlet {
 			ans = service.delete(userid);
 			request.setAttribute("ans", ans);
 			updateList(request);
-			getServletContext().getRequestDispatcher("/client/usermanager.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/client/clientmanager.jsp").forward(request, response);
 			break;
 		}
 	}

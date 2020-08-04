@@ -36,14 +36,16 @@
 			for (ClientDTO u : list) {
 		%>
 		<tr>
-			<td><a href=ClientServlet?mode=read&id=<%=u.getUserId()%>>
+			<td><a href=ClientServlet?mode=read&id=<%=u.getUserId() %>>
+			<%=u.getUserId() %>
+				
 			</a></td>
 			<td> <%=u.getName()%></td>
 			<td><%=u.getSurname()%></td>
 			<td><%=u.getAddress()%></td>
-			<td><a href=ClientServlet?mode=read&update=true&id=<%=u.getUserId()%>>Edit</a>
+			<td><a href=ClientServlet?mode=read&update=true&idclient=<%=u.getUserId()%>>Edit</a>
 			</td>
-			<td><a href=ClientServlet?mode=delete&id=<%=u.getUserId()%>>Delete</a>
+			<td><a href=ClientServlet?mode=delete&idclient=<%=u.getId()%>>Delete</a>
 			</td>
 
 		</tr>
@@ -57,15 +59,23 @@
 <form id="floatright" action="ClientServlet?mode=insert" method="post">
   <div class="row">
     <div class="col-25">
-      <label for="user">Nome</label>
+      <label for="userID">userID</label>
     </div>
     <div class="col-75">
-      <input type="text" id="client" name="nome" placeholder="inserisci nome">
+      <input type="text" id="userID" name="userID" placeholder="inseriscil'id dell'utente">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-     <label for="pass">Cognome</label>
+      <label for="nome">Nome</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="nome" name="nome" placeholder="inserisci nome">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+     <label for="cognome">Cognome</label>
     </div>
     <div class="col-75">
       <input type="text" id="cognome" name="cognome" placeholder="inserisci cognome"> 
@@ -73,7 +83,7 @@
   </div>
    <div class="row">
     <div class="col-25">
-     <label for="pass">Indirizzo</label>
+     <label for="indirizzo">Indirizzo</label>
     </div>
     <div class="col-75">
       <input type="text" id="indirizzo" name="indirizzo" placeholder="inserisci indirizzo"> 

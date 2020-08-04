@@ -20,7 +20,7 @@
 <%ClientDTO u = (ClientDTO) request.getAttribute("dto");%>
 
 
-<form id="floatleft" action="ClientServlet?mode=update&id=<%=u.getUserId()%>" method="post">
+<form id="floatleft" action="ClientServlet?mode=update&idclient=<%=u.getUserId()%>" method="post">
   <div class="row">
     <div class="col-25">
       <label for="user">UserID</label>

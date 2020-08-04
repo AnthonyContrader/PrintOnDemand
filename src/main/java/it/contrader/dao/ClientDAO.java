@@ -27,13 +27,13 @@ public class ClientDAO implements DAO<Client>{
 			ResultSet resultSet = statement.executeQuery(QUERY_ALL);
 			Client client;
 			while (resultSet.next()) {
-				int id = resultSet.getInt("userID");
+				int idclient = resultSet.getInt("idclient");
 				String name = resultSet.getString("nome");
 				String surname = resultSet.getString("cognome");
 				String address = resultSet.getString("indirizzo");
-				int idClient = resultSet.getInt("idclient");
-				client = new Client(id, name, surname, address,idClient);
-				client.setId(id);
+				int idUser = resultSet.getInt("userID");
+				client = new Client(idclient, name, surname, address,idUser);
+				client.setId(idclient);
 				clientsList.add(client);
 			}
 		} catch (SQLException e) {
