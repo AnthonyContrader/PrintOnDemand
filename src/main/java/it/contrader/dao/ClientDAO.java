@@ -11,7 +11,7 @@ public class ClientDAO implements DAO<Client>{
 
 	private final String QUERY_ALL = "SELECT * FROM client";
 	private final String QUERY_CREATE = "INSERT INTO client (userID, nome, cognome, indirizzo) VALUES (?,?,?,?)";
-	private final String QUERY_READ = "SELECT * FROM client WHERE userID=?";
+	private final String QUERY_READ = "SELECT * FROM client WHERE idclient=?";
 	private final String QUERY_UPDATE = "UPDATE client SET nome=?, cognome=?, indirizzo=? WHERE idclient=?";
 	private final String QUERY_DELETE = "DELETE FROM client WHERE idclient=?";
 
@@ -32,8 +32,8 @@ public class ClientDAO implements DAO<Client>{
 				String surname = resultSet.getString("cognome");
 				String address = resultSet.getString("indirizzo");
 				int idUser = resultSet.getInt("userID");
-				client = new Client(idclient, name, surname, address,idUser);
-				client.setId(idclient);
+				client = new Client(idUser, name, surname, address,idclient);
+				client.setUserId(idUser);
 				clientsList.add(client);
 			}
 		} catch (SQLException e) {
@@ -41,28 +41,7 @@ public class ClientDAO implements DAO<Client>{
 		}
 		return clientsList;
 	}
-	public List<Client> getAlluser() {
-		List<Client> clientsList = new ArrayList<>();
-		Connection connection = ConnectionSingleton.getInstance();
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(QUERY_ALL);
-			Client client;
-			while (resultSet.next()) {
-				int id = resultSet.getInt("userID");
-				String name = resultSet.getString("nome");
-				String surname = resultSet.getString("cognome");
-				String address = resultSet.getString("indirizzo");
-				int idClient = resultSet.getInt("idclient");
-				client = new Client(id, name, surname, address,idClient);
-				client.setId(id);
-				clientsList.add(client);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return clientsList;
-	}
+
 
 	public boolean insert(Client userToInsert) {
 		Connection connection = ConnectionSingleton.getInstance();
@@ -80,23 +59,24 @@ public class ClientDAO implements DAO<Client>{
 
 	}
 
-	public Client read(int iduser) {
+	public Client read(int idclient) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 
 
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READ);
-			preparedStatement.setInt(1, iduser);
+			preparedStatement.setInt(1, idclient);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			String name,surname,address;
-			int userId;
-			userId = resultSet.getInt("userID");
+			int idClient;
+			
 			name = resultSet.getString("nome");
 			surname = resultSet.getString("cognome");
 			address = resultSet.getString("indirizzo");
-			Client client = new Client(userId,name,surname,address);
-			client.setId(resultSet.getInt("idclient"));
+			idClient = resultSet.getInt("idclient");
+			Client client = new Client(name,surname,address,idClient);
+			client.setUserId(resultSet.getInt("userID"));
 
 			return client;
 		} catch (SQLException e) {
@@ -111,10 +91,10 @@ public class ClientDAO implements DAO<Client>{
 		Connection connection = ConnectionSingleton.getInstance();
 
 		// Check if id is present
-		if (clientToUpdate.getId() == 0)
+		if (clientToUpdate.getIdclient() == 0)
 			return false;
 
-		Client clientRead = read(clientToUpdate.getId());
+		Client clientRead = read(clientToUpdate.getIdclient());
 		if (!clientRead.equals(clientToUpdate)) {
 			try {
 				// Fill the userToUpdate object
@@ -136,7 +116,7 @@ public class ClientDAO implements DAO<Client>{
 				preparedStatement.setString(1, clientToUpdate.getName());
 				preparedStatement.setString(2, clientToUpdate.getSurname());
 				preparedStatement.setString(3, clientToUpdate.getAddress());
-				preparedStatement.setInt(4, clientToUpdate.getId());				
+				preparedStatement.setInt(4, clientToUpdate.getIdclient());				
 				int a = preparedStatement.executeUpdate();
 				if (a > 0)
 					return true;

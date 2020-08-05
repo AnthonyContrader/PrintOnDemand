@@ -1,6 +1,6 @@
 package it.contrader.model;
 public class Client {
-	private int id;
+	private int idclient;
 	private int userId;
 	private String nome;
 	private String cognome;
@@ -18,20 +18,29 @@ public class Client {
 		this.cognome = cognome;
 		this.indirizzo = indirizzo;
 	}
-	public Client (int userId, String nome, String cognome, String indirizzo, int id) {
-		this.id=id;
-		this.userId = userId;
+	public Client (String nome, String cognome, String indirizzo, int idclient) {
+		this.idclient=idclient;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.indirizzo = indirizzo;
 	}
-	public int getId() {
-		return this.id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
+	public Client (int userId, String nome, String cognome, String indirizzo, int idclient) {
+		
+		this.userId= userId;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.indirizzo = indirizzo;
+		this.idclient=idclient;
+	}
+
+	
+	public int getIdclient() {
+		return idclient;
+	}
+	public void setIdclient(int idclient) {
+		this.idclient = idclient;
+	}
 	public void setUserId(int userId) {
 		this.userId=userId;		
 	}
@@ -65,7 +74,7 @@ public class Client {
 		this.indirizzo = indirizzo;
 	}
 	public String toString() {
-		return  userId+"\t"+ nome + "\t"  + cognome +"\t" + indirizzo +"\t"+id;
+		return  userId+"\t"+ nome + "\t"  + cognome +"\t" + indirizzo +"\t"+idclient;
 	}
 		
 	@Override
@@ -77,7 +86,7 @@ public class Client {
 		if (getClass() != obj.getClass())
 			return false;
 		Client other = (Client) obj;
-		if (id != other.id)
+		if (idclient != other.idclient)
 			return false;
 		if (userId != other.userId)
 			return false;

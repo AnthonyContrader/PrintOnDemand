@@ -13,10 +13,14 @@
 
 <div class="navbar">
   <a  href="homeadmin.jsp">Home</a>
-  <a class="active" href="ClientServlet?mode=clientlist">Client</a>
+  <a  href="UserServlet?mode=userlist">Users</a>
+  <a class="active" href="ClientServlet?mode=clientlist">Profilo</a>
+  <a  href="ItemServlet?mode=itemlist">Articoli</a>
+  <a  href="OrderServlet?mode=orderlist">Ordini</a>
   <a href="LogoutServlet" id="logout">Logout</a>
-</div>
+  </div>
 <div class="main">
+
 	<%
 		List<ClientDTO> list = (List<ClientDTO>) request.getAttribute("list");
 	%>
@@ -36,16 +40,16 @@
 			for (ClientDTO u : list) {
 		%>
 		<tr>
-			<td><a href=ClientServlet?mode=read&id=<%=u.getUserId() %>>
+			<td><a href=ClientServlet?mode=read&idclient=<%=u.getIdclient() %>>
 			<%=u.getUserId() %>
 				
 			</a></td>
 			<td> <%=u.getName()%></td>
 			<td><%=u.getSurname()%></td>
 			<td><%=u.getAddress()%></td>
-			<td><a href=ClientServlet?mode=read&update=true&idclient=<%=u.getUserId()%>>Edit</a>
+			<td><a href=ClientServlet?mode=read&update=true&idclient=<%=u.getIdclient()%>>Edit</a>
 			</td>
-			<td><a href=ClientServlet?mode=delete&idclient=<%=u.getId()%>>Delete</a>
+			<td><a href=ClientServlet?mode=delete&idclient=<%=u.getIdclient()%>>Delete</a>
 			</td>
 
 		</tr>

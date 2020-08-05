@@ -30,7 +30,8 @@ public class ClientServlet extends HttpServlet {
 		Service<ClientDTO> service = new ClientService();
 		String mode = request.getParameter("mode");
 		ClientDTO dto;
-		int id;
+		int userid;
+		int clientid;
 		boolean ans;
 
 		switch (mode.toUpperCase()) {
@@ -41,8 +42,8 @@ public class ClientServlet extends HttpServlet {
 			break;
 
 		case "READ":
-			id = Integer.parseInt(request.getParameter("idclient"));
-			dto = service.read(id);
+			userid = Integer.parseInt(request.getParameter("idclient"));
+			dto = service.read(userid);
 			request.setAttribute("dto", dto);
 			
 			if (request.getParameter("update") == null) {
@@ -55,10 +56,11 @@ public class ClientServlet extends HttpServlet {
 			break;
 
 		case "INSERT":
-			int userid= Integer.parseInt(request.getParameter("userID").toString());
+			
 			String nome = request.getParameter("nome").toString();
 			String cognome = request.getParameter("cognome").toString();
 			String indirizzo =request.getParameter("indirizzo").toString();
+			userid= Integer.parseInt(request.getParameter("userID").toString());
 			dto = new ClientDTO (userid, nome, cognome, indirizzo);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
@@ -67,19 +69,20 @@ public class ClientServlet extends HttpServlet {
 			break;
 			
 		case "UPDATE":
+			
 			nome = request.getParameter("nome");
 			cognome = request.getParameter("cognome");
 			indirizzo = request.getParameter("indirizzo");
-			userid = Integer.parseInt(request.getParameter("userID"));
-			dto = new ClientDTO(nome, cognome,indirizzo,userid);
+			clientid = Integer.parseInt(request.getParameter("idclient"));
+			dto = new ClientDTO(nome, cognome,indirizzo,clientid);
 			ans = service.update(dto);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/client/clientmanager.jsp").forward(request, response);
 			break;
 
 		case "DELETE":
-			userid = Integer.parseInt(request.getParameter("idclient"));
-			ans = service.delete(userid);
+			clientid = Integer.parseInt(request.getParameter("idclient"));
+			ans = service.delete(clientid);
 			request.setAttribute("ans", ans);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/client/clientmanager.jsp").forward(request, response);

@@ -9,6 +9,7 @@ import it.contrader.model.Client;
 
 
 
+
 public class ClientConverter implements Converter<Client, ClientDTO> {
 	
 	/**
@@ -17,7 +18,7 @@ public class ClientConverter implements Converter<Client, ClientDTO> {
 	 */
 	@Override
 	public ClientDTO toDTO(Client client) {
-		ClientDTO clientDTO = new ClientDTO(client.getUserId(),client.getName(),client.getSurname(),client.getAddress(),client.getId());
+		ClientDTO clientDTO = new ClientDTO(client.getUserId(),client.getName(),client.getSurname(),client.getAddress(),client.getIdclient());
 		return clientDTO;
 	}
 	/**
@@ -25,7 +26,7 @@ public class ClientConverter implements Converter<Client, ClientDTO> {
 	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
 	 */
 	public Client toEntity(ClientDTO clientDTO) {
-		Client client = new Client(clientDTO.getUserId(), clientDTO.getName(),clientDTO.getSurname(),clientDTO.getAddress(),clientDTO.getId());
+		Client client = new Client(clientDTO.getUserId(), clientDTO.getName(),clientDTO.getSurname(),clientDTO.getAddress(),clientDTO.getIdclient());
 		return client;
 	}
 	

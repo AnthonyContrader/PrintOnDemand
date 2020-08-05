@@ -10,28 +10,24 @@
 <body>
 <%@ include file="../css/header.jsp" %>
 <div class="navbar">
-  <a href="homeadmin.jsp">Home</a>
-  <a class="active" href="UserServlet?mode=userlist">Users</a>
+  <a  href="homeadmin.jsp">Home</a>
+  <a  href="UserServlet?mode=userlist">Users</a>
+  <a class="active" href="ClientServlet?mode=clientlist">Profilo</a>
+  <a  href="ItemServlet?mode=itemlist">Articoli</a>
+  <a  href="OrderServlet?mode=orderlist">Ordini</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <br>
+
 <div class="main">
 
 <%ClientDTO u = (ClientDTO) request.getAttribute("dto");%>
 
 
-<form id="floatleft" action="ClientServlet?mode=update&idclient=<%=u.getUserId()%>" method="post">
+<form id="floatleft" action="ClientServlet?mode=update&idclient=<%=u.getIdclient()%>" method="post">
   <div class="row">
     <div class="col-25">
-      <label for="user">UserID</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="client" name="userid" value=<%=u.getUserId()%>>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-     <label for="pass">Nome</label>
+     <label for="nome">Nome</label>
     </div>
     <div class="col-75">
       <input
@@ -40,7 +36,7 @@
   </div>
   <div class="row">
     <div class="col-25">
-     <label for="pass">Cognome</label>
+     <label for="cognome">Cognome</label>
     </div>
     <div class="col-75">
       <input
@@ -49,7 +45,7 @@
   </div>
     <div class="row">
     <div class="col-25">
-     <label for="pass">Indirizzo</label>
+     <label for="indirizzo">Indirizzo</label>
     </div>
     <div class="col-75">
       <input
