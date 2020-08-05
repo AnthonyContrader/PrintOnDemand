@@ -16,9 +16,10 @@
 
 <div class="navbar">
   <a  href="homeadmin.jsp">Home</a>
-  <a class="active" href="UserServlet?mode=userlist">Users</a>
-  <a class="active" href="ItemServlet?mode=itemlist">Items</a>
-  <a class="active" href="OrderServlet?mode=itemlist">Orders</a>
+  <a  href="UserServlet?mode=userlist">Users</a>
+  <a  href="ClientServlet?mode=clientlist">Profilo</a>
+  <a  href="ItemServlet?mode=itemlist">Articoli</a>
+  <a class="active" href="OrderServlet?mode=orderlist">Ordini</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <div class="main">
@@ -41,13 +42,13 @@
 			for (OrderDTO u : list) {
 		%>
 		<tr>
-			<td><a href=OrderServlet?mode=read&id=<%=u.getOrderId() %>>
+			<td><a href=OrderServlet?mode=read&iditem=<%=u.getOrderId() %>>
 					<%=u.getClientId() %>
 			</a></td>
 			<td><%=u.getItemId()%></td>
 			<td><%=u.getDate()%></td>
 			<td><%=u.getPrezzo()%></td>
-			<td><a href=UserServlet?mode=read&update=true&id=<%=u.getOrderId()%>>Edit</a>
+			<td><a href=OrderServlet?mode=readitem&update=true&iditem=<%=u.getItemId()%>>Edit</a>
 			</td>
 			</td>
 
@@ -59,13 +60,13 @@
 
 
 
-<form id="floatright" action="ItemServlet?mode=insert" method="post">
+<form id="floatright" action="OrderServlet?mode=insert" method="post">
   <div class="row">
     <div class="col-25">
       <label for="idcl">IDCliente</label>
     </div>
     <div class="col-75">
-      <input type="text" id="idcl" name="IDCliente" placeholder="inserisci l'id del cliente cui spedire">
+      <input type="text" id="idcl" name="IDclient" placeholder="inserisci l'id del cliente cui spedire">
     </div>
   </div>
   <div class="row">

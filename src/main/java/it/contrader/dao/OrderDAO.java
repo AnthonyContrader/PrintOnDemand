@@ -30,7 +30,7 @@ public class OrderDAO implements DAO<Order> {
 	//operazioni peculiari
 	private final String QUERY_DUPLICATE = "INSERT INTO item (nome, descrizione, tipo, colore, taglia, immagine, link) SELECT item.nome, item.descrizione, item.tipo, item.colore, item.taglia, item.immagine, item.link FROM item WHERE iditem=?";
 	//private final String QUERY_MAX = "SELECT iditem FROM item ORDER BY IDitem DESC LIMIT 1";
-	private final String QUERY_MAX = "SELECT LAST_INSERT_ID()";
+	private final String QUERY_MAX = "SELECT LAST_INSERT_ID() as 'IDitem'";
 	private final String QUERY_CUSTOM = "UPDATE item set immagine=?, link=? WHERE iditem=?";
 	
 	
@@ -85,7 +85,7 @@ public class OrderDAO implements DAO<Order> {
 				
 				ResultSet resultSet = statementmax.executeQuery(QUERY_MAX);
 				resultSet.next();
-				maxId=resultSet.getInt("iditem");
+				maxId=resultSet.getInt("IDitem");
 				PreparedStatement preparedStatement = connection.prepareStatement(QUERY_CREATE);
 				preparedStatement.setInt(1, order.getClientId());
 				preparedStatement.setInt(2, maxId);

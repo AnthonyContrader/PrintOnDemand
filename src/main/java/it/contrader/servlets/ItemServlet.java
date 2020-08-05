@@ -1,5 +1,6 @@
 package it.contrader.servlets;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -9,7 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import it.contrader.dto.ItemDTO;
+import it.contrader.dto.UserDTO;
 import it.contrader.service.Service;
 import it.contrader.service.ItemService;
 
@@ -30,6 +34,7 @@ public class ItemServlet extends HttpServlet {
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		Service<ItemDTO> service = new ItemService();
 		String mode = request.getParameter("mode");
 		ItemDTO dto;
@@ -40,6 +45,19 @@ public class ItemServlet extends HttpServlet {
 
 		case "ITEMLIST":
 			updateList(request);
+			UserDTO logged= (UserDTO) session.getAttribute("user");
+			if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) {
+				System.out.println(true);
+				List<ItemDTO> filterlist=(List<ItemDTO>) request.getAttribute("list");
+				List<ItemDTO> list=new ArrayList<>();
+				for ( ItemDTO u: filterlist) {
+					if((u.getImmagine() == null)&&(u.getLink() == null )) { 
+						System.out.println(u);
+						list.add(u);
+					}				
+				}
+				request.setAttribute("list", list);
+			}
 			getServletContext().getRequestDispatcher("/item/itemmanager.jsp").forward(request, response);
 			break;
 

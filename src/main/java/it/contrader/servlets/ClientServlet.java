@@ -7,7 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
+import it.contrader.dto.UserDTO;
 import it.contrader.dto.ClientDTO;
 import it.contrader.service.ClientService;
 import it.contrader.service.Service;
@@ -27,6 +28,7 @@ public class ClientServlet extends HttpServlet {
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		Service<ClientDTO> service = new ClientService();
 		String mode = request.getParameter("mode");
 		ClientDTO dto;
@@ -37,6 +39,8 @@ public class ClientServlet extends HttpServlet {
 		switch (mode.toUpperCase()) {
 
 		case "CLIENTLIST":
+			UserDTO logged= (UserDTO) session.getAttribute("user");
+			System.out.println(logged);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/client/clientmanager.jsp").forward(request, response);
 			break;
