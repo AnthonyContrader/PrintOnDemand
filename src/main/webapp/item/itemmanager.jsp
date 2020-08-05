@@ -45,7 +45,7 @@
 			for (ItemDTO u : list) {
 		%>
 		<tr>
-			<td><a href=ItemServlet?mode=read&id=<%=u.getId()%>>
+			<td><a href=ItemServlet?mode=read&iditem=<%=u.getId()%>>
 					<%=u.getName()%>
 			</a></td>
 			<td><%=u.getDescr()%></td>
