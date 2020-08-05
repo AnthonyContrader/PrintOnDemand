@@ -21,7 +21,7 @@ public class ItemConverter  implements Converter<Item, ItemDTO> {
 	 */
 	@Override
 	public ItemDTO toDTO(Item item) {
-		ItemDTO itemDTO = new ItemDTO(item.getName(), item.getDescr(), item.getTipo(), item.getColore(),item.getTaglia(),item.getImmagine(),item.getLink());
+		ItemDTO itemDTO = new ItemDTO(item.getName(), item.getDescr(), item.getTipo(), item.getColore(),item.getTaglia(),item.getImmagine(),item.getLink(),item.getId());
 		return itemDTO;
 	}
 
@@ -31,7 +31,7 @@ public class ItemConverter  implements Converter<Item, ItemDTO> {
 	 */
 	@Override
 	public Item toEntity(ItemDTO itemDTO) {
-		Item item = new Item(itemDTO.getName(), itemDTO.getDescr(), itemDTO.getTipo(), itemDTO.getColore(),itemDTO.getTaglia(),itemDTO.getImmagine(),itemDTO.getLink());
+		Item item = new Item(itemDTO.getName(), itemDTO.getDescr(), itemDTO.getTipo(), itemDTO.getColore(),itemDTO.getTaglia(),itemDTO.getImmagine(),itemDTO.getLink(),itemDTO.getId());
 		return item;
 	}
 	

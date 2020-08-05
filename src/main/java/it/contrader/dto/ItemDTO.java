@@ -12,8 +12,6 @@ package it.contrader.dto;
 public class ItemDTO {
 	
 	private int id;
-	
-
 	private String nome;
 	private String descrizione;
 	private String tipo;
@@ -63,8 +61,8 @@ public class ItemDTO {
 		this.tipo = tipo;
 	}
 
-
 	public String getDescr() {
+		
 		return this.descrizione;
 	}
 
@@ -114,6 +112,6 @@ public class ItemDTO {
 
 	@Override
 	public String toString() {
-		return  nome + "\t"  + descrizione +"\t" +   tipo + "\t" + colore+ "\t"  + taglia +"\t" + immagine +"\t" + link;
+		return  nome + "\t"  + descrizione +"\t" +   tipo + "\t" + colore+ "\t"  + taglia +"\t" + immagine +"\t" + link+"\t" + id;
 	}
 }

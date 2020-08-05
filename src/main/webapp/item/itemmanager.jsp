@@ -16,8 +16,10 @@
 
 <div class="navbar">
   <a  href="homeadmin.jsp">Home</a>
-  <a class="active" href="UserServlet?mode=userlist">Users</a>
-  <a class="active" href="ItemServlet?mode=itemlist">Items</a>
+  <a  href="UserServlet?mode=userlist">Users</a>
+  <a  href="ClientServlet?mode=clientlist">Profilo</a>
+  <a class="active" href="ItemServlet?mode=itemlist">Articoli</a>
+  <a  href="OrderServlet?mode=orderlist">Ordini</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <div class="main">
@@ -52,9 +54,9 @@
 			<td><%=u.getTaglia()%></td>
 			<td><%=u.getImmagine()%></td>
 			<td><%=u.getLink()%></td>
-			<td><a href=UserServlet?mode=read&update=true&id=<%=u.getId()%>>Edit</a>
+			<td><a href=ItemServlet?mode=read&update=true&iditem=<%=u.getId()%>>Edit</a>
 			</td>
-			<td><a href=UserServlet?mode=delete&id=<%=u.getId()%>>Delete</a>
+			<td><a href=ItemServlet?mode=delete&iditem=<%=u.getId()%>>Delete</a>
 			</td>
 
 		</tr>
@@ -76,10 +78,10 @@
   </div>
   <div class="row">
     <div class="col-25">
-     <label for="descr">Descrizione</label>
+     <label for="descrizione">Descrizione</label>
     </div>
     <div class="col-75">
-      <input type="text" id="descr" name="descr" placeholder="inserisci descrizione oggetto"> 
+      <input type="text" id="descrizione" name="descrizione" placeholder="inserisci descrizione oggetto"> 
     </div>
   </div>
   
@@ -108,34 +110,9 @@
       <input type="text" id="taglia" name="taglia" placeholder="inserisci taglia oggetto(se possiede taglia)"> 
     </div>
   </div>
-   <div class="row">
-    <div class="col-25">
-     <label for="immagine">Immagine</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="immagine" name="immagine" placeholder="inserisci immagine da aggiungere all'oggetto"> 
-    </div>
-  </div>
-   <div class="row">
-    <div class="col-25">
-     <label for="link">Link</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="link" name="link" placeholder="inserisci QR Link da associare all'immagine"> 
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="type">Usertype</label>
-    </div>
-   		 <div class="col-75">
- 			<select id="type" name="usertype">
-  				<option value="ADMIN">ADMIN</option>
-  				<option value="USER">USER</option>
- 
-			</select>
-    	</div>
-  </div>
+  
+   
+
       <button type="submit" >Insert</button>
 </form>
 

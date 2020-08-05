@@ -11,34 +11,36 @@
 <body>
 <%@ include file="../css/header.jsp" %>
 <div class="navbar">
-  <a href="homeadmin.jsp">Home</a>
-  <a class="active" href="UserServlet?mode=userlist">Users</a>
-  <a class="active" href="ItemServlet?mode=itemlist">Items</a>
+  <a  href="homeadmin.jsp">Home</a>
+  <a  href="UserServlet?mode=userlist">Users</a>
+  <a  href="ClientServlet?mode=clientlist">Profilo</a>
+  <a class="active" href="ItemServlet?mode=itemlist">Articoli</a>
+  <a  href="OrderServlet?mode=orderlist">Ordini</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <br>
 <div class="main">
 
 <%ItemDTO u = (ItemDTO) request.getAttribute("dto");%>
-<%UserDTO v = (UserDTO) request.getAttribute("dto");%>
 
 
-<form id="floatleft" action="ItemServlet?mode=update&id=<%=u.getId()%>" method="post">
+
+<form id="floatleft" action="ItemServlet?mode=update&iditem=<%=u.getId()%>" method="post">
   <div class="row">
     <div class="col-25">
-      <label for="nomw">Nomw</label>
+      <label for="nome">Nome</label>
     </div>
     <div class="col-75">
-      <input type="text" id="nome" name="nome" value=<%=u.getName()%>>
+      <input type="text" id="nome" name="nome" value="<%=u.getName()%>">
     </div>
   </div>
   <div class="row">
     <div class="col-25">
-     <label for="descr">Descrizione</label>
+     <label for="descrizione">Descrizione</label>
     </div>
     <div class="col-75">
       <input
-			type="text" id="descr" name="descr" value=<%=u.getDescr()%>> 
+			type="text" id="descrizione" name="descrizione" value="<%=u.getDescr()%>"> 
     </div>
   </div>
    <div class="row">
@@ -68,27 +70,7 @@
 			type="text" id="taglia" name="taglia" value=<%=u.getTaglia()%>> 
     </div>
   </div>
-   <div class="row">
-    <div class="col-25">
-     <label for="immagine">Immagine</label>
-    </div>
-    <div class="col-75">
-      <input
-			type="text" id="immagine" name="immagine" value=<%=u.getImmagine()%>> 
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col-25">
-      <label for="type">Usertype</label>
-    </div>
-   		 <div class="col-75">
- 			<select id="type" name="usertype">
-  				<option value="ADMIN" <%if(v.getUsertype().equals("ADMIN")) {%>selected<%}%>>ADMIN</option>
-  				<option value="USER" <%if(v.getUsertype().equals("USER")) {%>selected<%}%>>USER</option>
-			</select>
-    	</div>
-  </div>
+   
       <button type="submit" >Edit</button>
 </form>
 
