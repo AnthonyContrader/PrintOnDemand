@@ -16,6 +16,8 @@ public interface Service<DTO> {
 	
 	public DTO read(int id);
 	
+	//public DTO readItem(String tipo);
+	
 	public boolean insert(DTO dto);
 	
 	public boolean update(DTO dto);

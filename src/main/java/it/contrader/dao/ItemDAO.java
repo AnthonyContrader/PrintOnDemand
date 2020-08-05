@@ -18,6 +18,7 @@ public class ItemDAO implements DAO<Item> {
 	private final String QUERY_ALL = "SELECT * FROM item";
 	private final String QUERY_CREATE = "INSERT INTO item (nome,descrizione,tipo,colore,taglia,immagine,link) VALUES (?,?,?,?,?,?,?)";
 	private final String QUERY_READ = "SELECT * FROM item WHERE iditem=?";
+	//private final String QUERY_READITEM = "SELECT * FROM item WHERE tipo=?";
 	private final String QUERY_UPDATE = "UPDATE item SET nome=?, descrizione=?, tipo=?,colore=?,taglia=?,immagine=?,link=? WHERE iditem=?";
 	private final String QUERY_DELETE = "DELETE FROM item WHERE iditem=?";
 
@@ -40,7 +41,7 @@ public class ItemDAO implements DAO<Item> {
 				String colore = resultSet.getString("colore");
 				String taglia = resultSet.getString("taglia");
 				String immagine = resultSet.getString("immagine");
-				String link = resultSet.getString("linke");
+				String link = resultSet.getString("link");
 				item = new Item(nome, descrizione, tipo,colore, taglia,immagine,link);
 				item.setId(id);
 				itemsList.add(item);
@@ -80,6 +81,7 @@ public class ItemDAO implements DAO<Item> {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			String nome,descrizione,tipo,colore,taglia,immagine,link;
+			
 
 			nome = resultSet.getString("nome");
 			descrizione = resultSet.getString("descrizione");
@@ -97,6 +99,37 @@ public class ItemDAO implements DAO<Item> {
 		}
 
 	}
+	
+	
+	/*public Item readItem(String tipo) {
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+
+
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READITEM);
+			preparedStatement.setString(1, tipo);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			String nome,descrizione,colore,taglia,immagine,link;
+			int id;
+
+			id=resultSet.getInt("iditem");
+			nome = resultSet.getString("nome");
+			descrizione = resultSet.getString("descrizione");
+			tipo = resultSet.getString("tipo");
+			colore = resultSet.getString("colore");
+			taglia = resultSet.getString("taglia");
+			immagine = resultSet.getString("immagine");
+			link = resultSet.getString("link");
+			Item item = new Item(nome, descrizione, tipo,colore, taglia,immagine,link);
+			item.setId(resultSet.getInt("iditem"));
+
+			return item;
+		} catch (SQLException e) {
+			return null;
+		}
+
+	}*/
 
 	public boolean update(Item itemToUpdate) {
 		Connection connection = ConnectionSingleton.getInstance();

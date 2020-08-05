@@ -44,8 +44,23 @@ public class ItemServlet extends HttpServlet {
 			break;
 
 		case "READ":
-			id = Integer.parseInt(request.getParameter("id"));
+			id = Integer.parseInt(request.getParameter("iditem"));
 			dto = service.read(id);
+			request.setAttribute("dto", dto);
+			
+			if (request.getParameter("update") == null) {
+				 getServletContext().getRequestDispatcher("/item/readitem.jsp").forward(request, response);
+				
+			}
+			
+			else getServletContext().getRequestDispatcher("/item/updateitem.jsp").forward(request, response);
+			
+			break;
+
+		/*case "READITEM":
+			
+			String tipoI = request.getParameter("tipo").toString();
+			dto = service.readItem(tipoI);
 			request.setAttribute("dto", dto);
 			
 			if (request.getParameter("update") == null) {
@@ -55,17 +70,17 @@ public class ItemServlet extends HttpServlet {
 			
 			else getServletContext().getRequestDispatcher("/item/updatitem.jsp").forward(request, response);
 			
-			break;
-
+			break;*/
+			
 		case "INSERT":
 			String nome = request.getParameter("nome").toString();
 			String descrizione = request.getParameter("descrizione").toString();
 			String tipo = request.getParameter("tipo").toString();
 			String colore = request.getParameter("colore").toString();
 			String taglia = request.getParameter("taglia").toString();
-			String immagine = request.getParameter("immagine").toString();
-			String link = request.getParameter("link").toString();
-			dto = new ItemDTO (nome,descrizione,tipo,colore,taglia,immagine,link);
+			String immagine = request.getParameter("immagine");
+			String link = request.getParameter("link");
+			dto = new ItemDTO (nome,descrizione,tipo,colore,taglia,"","");
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
@@ -74,15 +89,15 @@ public class ItemServlet extends HttpServlet {
 			
 		case "UPDATE":
 			
-			 nome = request.getParameter("nome").toString();
-			 descrizione = request.getParameter("descrizione").toString();
-			 tipo = request.getParameter("tipo").toString();
-			 colore = request.getParameter("colore").toString();
-			 taglia = request.getParameter("taglia").toString();
-			 immagine = request.getParameter("immagine").toString();
-			 link = request.getParameter("link").toString();
+			 nome = request.getParameter("nome");
+			 descrizione = request.getParameter("descrizione");
+			 tipo = request.getParameter("tipo");
+			 colore = request.getParameter("colore");
+			 taglia = request.getParameter("taglia");
+			// immagine = request.getParameter("immagine");
+			 //link = request.getParameter("link");
 			id = Integer.parseInt(request.getParameter("iditem"));
-			dto = new ItemDTO (nome,descrizione,tipo,colore,taglia,immagine,link);
+			dto = new ItemDTO (nome,descrizione,tipo,colore,taglia,"","",id);
 			ans = service.update(dto);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/item/itemmanager.jsp").forward(request, response);
