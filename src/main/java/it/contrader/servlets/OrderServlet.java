@@ -1,17 +1,22 @@
 package it.contrader.servlets;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.contrader.service.Service;
+import it.contrader.service.ClientService;
 import it.contrader.service.ItemService;
 import it.contrader.dto.ItemDTO;
 import it.contrader.dto.OrderDTO;
+import it.contrader.dto.UserDTO;
+import it.contrader.dto.ClientDTO;
 //import it.contrader.dto.UserDTO;
 import it.contrader.service.OrderService;
 
@@ -29,11 +34,15 @@ public class OrderServlet extends HttpServlet {
 
 	public void updateList(HttpServletRequest request) {
 		Service<OrderDTO> service = new OrderService();
+		Service<ClientDTO> servCli = new ClientService();
 		List<OrderDTO>listDTO = service.getAll();
+		List<ClientDTO>listCliDTO= servCli.getAll();
 		request.setAttribute("list", listDTO);
+		request.setAttribute("clist", listCliDTO);
 	}
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		Service<OrderDTO> service = new OrderService();
 		Service<ItemDTO> servItem= new ItemService();
 		String mode = request.getParameter("mode");
@@ -46,6 +55,23 @@ public class OrderServlet extends HttpServlet {
 		switch (mode.toUpperCase()) {
 		case "ORDERLIST":
 			updateList(request);
+			UserDTO logged= (UserDTO) session.getAttribute("user");
+			if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) {
+				List<ClientDTO> fclist=(List<ClientDTO>) request.getAttribute("clist");
+				List<OrderDTO> flist=(List<OrderDTO>) request.getAttribute("list");
+				List<OrderDTO> list=new ArrayList<>();
+				for (ClientDTO t: fclist) {
+					if(logged.getId()==t.getUserId()) {
+						
+						for(OrderDTO u: flist) {
+							if(t.getIdclient()==u.getClientId())
+								list.add(u);
+						}
+						
+					}
+				}				
+				request.setAttribute("list", list);
+			}
 			getServletContext().getRequestDispatcher("/order/ordermanager.jsp").forward(request, response);
 			break;
 		case "READ":

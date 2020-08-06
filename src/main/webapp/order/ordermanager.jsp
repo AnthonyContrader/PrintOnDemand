@@ -31,10 +31,10 @@
 
 	<table>
 		<tr>
-			<th>IDCliente</th>
-			<th>IDitem</th>
-			<th>data</th>
-			<th>prezzo</th>
+			<th>Spedizione</th>
+			<th>Articolo</th>
+			<th>Data</th>
+			<th>Prezzo</th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -42,13 +42,14 @@
 			for (OrderDTO u : list) {
 		%>
 		<tr>
-			<td><a href=OrderServlet?mode=read&iditem=<%=u.getOrderId() %>>
-					<%=u.getClientId() %>
+			<td><a href=ClientServlet?mode=read&idclient=<%=u.getClientId() %>>
+					Dettaglio
 			</a></td>
-			<td><%=u.getItemId()%></td>
+			<td><a href=ItemServlet?mode=read&iditem=<%=u.getItemId() %>><%=u.getItemId()%>
+			</a></td>
 			<td><%=u.getDate()%></td>
 			<td><%=u.getPrezzo()%></td>
-			<td><a href=OrderServlet?mode=readitem&update=true&iditem=<%=u.getItemId()%>>Edit</a>
+			<td><a href=OrderServlet?mode=readitem&update=true&iditem=<%=u.getItemId()%>>Personalizza</a>
 			</td>
 			</td>
 
@@ -77,7 +78,7 @@
       <input type="text" id="idit" name="IDitem" placeholder="inserisci l'id dell'item da inserire"> 
     </div>
   </div>
-  
+ <!--  
    <div class="row">
     <div class="col-25">
      <label for="immagine">Immagine</label>
@@ -93,7 +94,7 @@
     <div class="col-75">
       <input type="text" id="link" name="link" placeholder="inserisci QR Link da associare all'immagine"> 
     </div>
-  </div>
+  </div>--> 
       <button type="submit" >Insert</button>
 </form>
 
