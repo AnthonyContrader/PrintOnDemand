@@ -44,21 +44,50 @@ public class ItemServlet extends HttpServlet {
 		switch (mode.toUpperCase()) {
 
 		case "ITEMLIST":
-			updateList(request);
+			
 			UserDTO logged= (UserDTO) session.getAttribute("user");
-			if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) {
-				System.out.println(true);
+			
+			if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) 
+			{
+				updateList(request);
 				List<ItemDTO> filterlist=(List<ItemDTO>) request.getAttribute("list");
 				List<ItemDTO> list=new ArrayList<>();
-				for ( ItemDTO u: filterlist) {
-					if((u.getImmagine() == null)&&(u.getLink() == null )) { 
-						System.out.println(u);
+				for ( ItemDTO u: filterlist) 
+				{
+					
+					if( ((u.getImmagine() == null) || (u.getImmagine().compareTo("")==0)) && (u.getLink() == null || (u.getLink().compareTo("")==0) )) 
+					{ 
+						
 						list.add(u);
 					}				
 				}
 				request.setAttribute("list", list);
+				getServletContext().getRequestDispatcher("/item/useritemmanager.jsp").forward(request, response);
 			}
-			getServletContext().getRequestDispatcher("/item/itemmanager.jsp").forward(request, response);
+			else 
+			{
+				updateList(request);
+				getServletContext().getRequestDispatcher("/item/itemmanager.jsp").forward(request, response);
+				//if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) 
+				//{
+					/*System.out.println(true);
+					List<ItemDTO> filterlist=(List<ItemDTO>) request.getAttribute("list");
+					List<ItemDTO> list=new ArrayList<>();
+					for ( ItemDTO u: filterlist) 
+					{
+						if((u.getImmagine() == null)&&(u.getLink() == null )) 
+						{ 
+							System.out.println(u);
+							list.add(u);
+						}				
+					}
+					request.setAttribute("list", list);
+					getServletContext().getRequestDispatcher("/item/itemmanager.jsp").forward(request, response);*/
+				
+				
+				//}
+			}
+			//getServletContext().getRequestDispatcher("/item/itemmanager.jsp").forward(request, response);
 			break;
 
 		case "READ":
@@ -75,20 +104,34 @@ public class ItemServlet extends HttpServlet {
 			
 			break;
 
-		/*case "READITEM":
+		case "READITEM":
 			
-			String tipoI = request.getParameter("tipo").toString();
-			dto = service.readItem(tipoI);
-			request.setAttribute("dto", dto);
 			
-			if (request.getParameter("update") == null) {
-				 getServletContext().getRequestDispatcher("/item/readitem.jsp").forward(request, response);
+			String tipoI = request.getParameter("tipo");
+			//System.out.println(tipoI);
+			id = Integer.parseInt(request.getParameter("iditem"));
+			//dto = service.read(id);
+			//request.setAttribute("dto", dto);
+			updateList(request);
+			List<ItemDTO> filterlist=(List<ItemDTO>) request.getAttribute("list");
+				List<ItemDTO> list=new ArrayList<>();
+				for ( ItemDTO u: filterlist) 
+				{
+					
+					if(u.getTipo().compareTo(tipoI)==0)  
+					{ 
+					
+						list.add(u);
+					}				
+				}
+				String usertype= ( (UserDTO) session.getAttribute("user")).getUsertype();
+				request.setAttribute("list", list);
+				if(usertype.compareTo("USER")==0) 
+					getServletContext().getRequestDispatcher("/item/useritemmanager.jsp").forward(request, response);
+				else {getServletContext().getRequestDispatcher("/item/itemmanager.jsp").forward(request, response); }
+			
 				
-			}
-			
-			else getServletContext().getRequestDispatcher("/item/updatitem.jsp").forward(request, response);
-			
-			break;*/
+			break;
 			
 		case "INSERT":
 			String nome = request.getParameter("nome").toString();

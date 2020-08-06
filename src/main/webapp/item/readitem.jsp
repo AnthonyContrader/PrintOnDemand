@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="it.contrader.dto.ItemDTO"%>
+    pageEncoding="ISO-8859-1" import="it.contrader.dto.ItemDTO"
+    import="it.contrader.dto.UserDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,10 @@
 <br>
 
 <div class="main">
-<%ItemDTO u = (ItemDTO) request.getAttribute("dto");%>
+<%ItemDTO u = (ItemDTO) request.getAttribute("dto");
+String usertype=((UserDTO)request.getSession().getAttribute("user")).getUsertype();
+%>
+
 
 
 <table>
@@ -30,8 +34,15 @@
 		<th>Tipo</th>
 		<th>Colore</th>
 		<th>Taglia</th>
+		
+		<% if(usertype.compareTo("ADMIN")==0) {
+		%>
 		<th>Immagine</th>
 		<th>QRLink</th>
+		<% } %>
+		
+		
+		
 	</tr>
 	<tr>
 		<td><%=u.getName()%></td>
@@ -39,8 +50,13 @@
 		<td><%=u.getTipo()%></td>
 		<td> <%=u.getColore()%></td>
 		<td> <%=u.getTaglia()%></td>
+		
+		<% if(usertype.compareTo("ADMIN")==0) {
+		%>
 		<td> <%=u.getImmagine()%></td>
 		<td> <%=u.getLink()%></td>
+			<% } %>
+		
 	</tr>	
 </table>
 

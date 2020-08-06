@@ -40,6 +40,7 @@
 			<th>QRLink</th>
 			<th></th>
 			<th></th>
+			<th></th>
 		</tr>
 		<%
 			for (ItemDTO u : list) {
@@ -49,7 +50,8 @@
 					<%=u.getName()%>
 			</a></td>
 			<td><%=u.getDescr()%></td>
-			<td><%=u.getTipo()%></td>
+			<td><a href="ItemServlet?mode=readitem&tipo=<%=u.getTipo()%>&iditem=<%=u.getId()%>">
+					<%=u.getTipo()%></a></td>
 			<td><%=u.getColore()%></td>
 			<td><%=u.getTaglia()%></td>
 			<td><%=u.getImmagine()%></td>
@@ -57,6 +59,8 @@
 			<td><a href=ItemServlet?mode=read&update=true&iditem=<%=u.getId()%>>Edit</a>
 			</td>
 			<td><a href=ItemServlet?mode=delete&iditem=<%=u.getId()%>>Delete</a>
+			</td>
+			<td><a href=OrderServlet?mode=read&update=true&iditem=<%=u.getId()%>>Ordina</a>
 			</td>
 
 		</tr>
