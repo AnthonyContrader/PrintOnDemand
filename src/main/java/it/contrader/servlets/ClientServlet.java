@@ -1,6 +1,7 @@
 package it.contrader.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,9 +22,24 @@ public class ClientServlet extends HttpServlet {
 	}
 	
 	public void updateList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserDTO logged= (UserDTO) session.getAttribute("user");
 		Service<ClientDTO> service = new ClientService();
 		List<ClientDTO>listDTO = service.getAll();
-		request.setAttribute("list", listDTO);
+		if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) {
+			//List<ClientDTO> filterlist=(List<ClientDTO>) request.getAttribute("list");
+			List<ClientDTO> list=new ArrayList<>();
+			for ( ClientDTO u: listDTO) {
+				if((u.getUserId() == logged.getId() )) { 
+					System.out.println(u);
+					list.add(u);
+				}				
+			}
+		request.setAttribute("list", list);
+		}
+		else {
+			request.setAttribute("list", listDTO);
+		}
 	}
 
 	@Override
@@ -39,8 +55,6 @@ public class ClientServlet extends HttpServlet {
 		switch (mode.toUpperCase()) {
 
 		case "CLIENTLIST":
-			UserDTO logged= (UserDTO) session.getAttribute("user");
-			System.out.println(logged);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/client/clientmanager.jsp").forward(request, response);
 			break;
