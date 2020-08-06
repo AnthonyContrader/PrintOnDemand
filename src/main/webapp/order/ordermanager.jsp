@@ -2,7 +2,9 @@
 	pageEncoding="ISO-8859-1" 
 	import="java.util.List"
 	import="it.contrader.dto.OrderDTO"
-	import="it.contrader.dto.UserDTO"%>
+	import="it.contrader.dto.UserDTO"
+	import="it.contrader.dto.ClientDTO"
+	import="it.contrader.dto.ItemDTO"%>
 	
 <!DOCTYPE html>
 <html>
@@ -25,7 +27,12 @@
 <div class="main">
 	<%
 		List<OrderDTO> list = (List<OrderDTO>) request.getAttribute("list");
-	%>
+		List<ClientDTO> clist = (List<ClientDTO>) request.getAttribute("clist");
+		int artscelto;
+		if(request.getAttribute("artscelto")==null) artscelto=0;
+		else artscelto=((ItemDTO)request.getAttribute("artscelto")).getId();
+		
+		%>
 
 <br>
 
@@ -64,21 +71,55 @@
 <form id="floatright" action="OrderServlet?mode=insert" method="post">
   <div class="row">
     <div class="col-25">
-      <label for="idcl">IDCliente</label>
+      <label for="idcl">Indirizzo</label>
     </div>
-    <div class="col-75">
-      <input type="text" id="idcl" name="IDclient" placeholder="inserisci l'id del cliente cui spedire">
-    </div>
+   		 <div class="col-75">
+ 			
+ 			<%if(!clist.isEmpty()){%>
+ 			<select id="idcl" name="IDclient">
+ 			<%
+ 				for (ClientDTO c: clist){
+ 			
+ 			%>
+  				<option value=<%=c.getIdclient() %>><%=c.getName() %> , <%=c.getAddress() %></option>
+  			<% 
+ 			}
+ 			%>
+ 			</select>
+ 			<%
+ 			}else
+ 			{
+ 			%>
+ 			
+ 			<div class="col-75">
+ 			<a href="ClientServlet?mode=clientlist">Devi prima creare un indirizzo!</a>
+ 			</div>
+ 			
+ 			<%
+ 			}
+ 			%>
+    	</div>
   </div>
   <div class="row">
     <div class="col-25">
-     <label for="idit">IDitem</label>
+     <label for="idit">Articolo</label>
     </div>
     <div class="col-75">
-      <input type="text" id="idit" name="IDitem" placeholder="inserisci l'id dell'item da inserire"> 
+       <%
+       if(artscelto==0){
+       %>
+       <a href="ItemServlet?mode=itemlist">Devi prima scegliere l'articolo!</a>
+        <%
+       }else{
+       %>
+       <input type="hidden" id="idit" name="IDitem" value=<%=artscelto%>>
+       <%=((ItemDTO)request.getAttribute("artscelto")).getName() %>, <%=((ItemDTO)request.getAttribute("artscelto")).getTipo() %> 
+       <%}
+       %>
     </div>
   </div>
- <!--  
+ <!-- 
+ <input type="text" id="idit" name="IDitem" placeholder="inserisci l'id dell'item da inserire"> 
    <div class="row">
     <div class="col-25">
      <label for="immagine">Immagine</label>
@@ -95,7 +136,12 @@
       <input type="text" id="link" name="link" placeholder="inserisci QR Link da associare all'immagine"> 
     </div>
   </div>--> 
+      <%if(artscelto!=0 &&(!clist.isEmpty())){
+      %>
       <button type="submit" >Insert</button>
+      <%
+      }
+      %>
 </form>
 
 </div>

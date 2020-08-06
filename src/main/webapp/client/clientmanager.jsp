@@ -25,7 +25,8 @@
 	<%
 		List<ClientDTO> list = (List<ClientDTO>) request.getAttribute("list");
 	    String usertype=((UserDTO)request.getSession().getAttribute("user")).getUsertype();
-	    int userid=list.get(0).getUserId();
+	    int userid=((UserDTO)request.getSession().getAttribute("user")).getId();
+	    
 
 	%>
 

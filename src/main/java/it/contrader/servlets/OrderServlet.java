@@ -46,12 +46,14 @@ public class OrderServlet extends HttpServlet {
 		Service<OrderDTO> service = new OrderService();
 		Service<ItemDTO> servItem= new ItemService();
 		String mode = request.getParameter("mode");
+		List<OrderDTO> list=new ArrayList<>();
+		List<ClientDTO> fcflist=new ArrayList<>();
 		OrderDTO dto;
 		ItemDTO dtoi;
 		int id;
 		boolean ans;
 		String immagine;
-		String link;
+		String link;	
 		switch (mode.toUpperCase()) {
 		case "ORDERLIST":
 			updateList(request);
@@ -59,19 +61,27 @@ public class OrderServlet extends HttpServlet {
 			if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) {
 				List<ClientDTO> fclist=(List<ClientDTO>) request.getAttribute("clist");
 				List<OrderDTO> flist=(List<OrderDTO>) request.getAttribute("list");
-				List<OrderDTO> list=new ArrayList<>();
 				for (ClientDTO t: fclist) {
 					if(logged.getId()==t.getUserId()) {
 						
 						for(OrderDTO u: flist) {
 							if(t.getIdclient()==u.getClientId())
 								list.add(u);
+								
 						}
-						
+						fcflist.add(t);
 					}
 				}				
 				request.setAttribute("list", list);
-			}
+				request.setAttribute("clist", fcflist);
+			}else 
+			
+					
+			
+			if(request.getParameter("iditem")!=null) {
+				dtoi=servItem.read(Integer.parseInt(request.getParameter("iditem")));
+				request.setAttribute("artscelto",dtoi);
+			} else request.setAttribute("artscelto", null);
 			getServletContext().getRequestDispatcher("/order/ordermanager.jsp").forward(request, response);
 			break;
 		case "READ":

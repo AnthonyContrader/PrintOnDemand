@@ -60,7 +60,7 @@
 			</td>
 			<td><a href=ItemServlet?mode=delete&iditem=<%=u.getId()%>>Delete</a>
 			</td>
-			<td><a href=OrderServlet?mode=read&update=true&iditem=<%=u.getId()%>>Ordina</a>
+			<td><a href=OrderServlet?mode=orderlist&iditem=<%=u.getId()%>>Ordina</a>
 			</td>
 
 		</tr>

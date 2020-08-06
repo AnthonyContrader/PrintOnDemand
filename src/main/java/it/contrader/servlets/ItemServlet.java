@@ -118,7 +118,7 @@ public class ItemServlet extends HttpServlet {
 				for ( ItemDTO u: filterlist) 
 				{
 					
-					if(u.getTipo().compareTo(tipoI)==0)  
+					if((u.getTipo().compareTo(tipoI)==0)&&(((u.getImmagine() == null) || (u.getImmagine().compareTo("")==0)) && (u.getLink() == null || (u.getLink().compareTo("")==0))))  
 					{ 
 					
 						list.add(u);

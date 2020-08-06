@@ -50,7 +50,7 @@
 					<%=u.getTipo()%></a></td>
 			<td><%=u.getColore()%></td>
 			<td><%=u.getTaglia()%></td>
-			<td><a href=OrderServlet?mode=read&update=true&iditem=<%=u.getId()%>>Ordina</a>
+			<td><a href=OrderServlet?mode=orderlist&iditem=<%=u.getId()%>>Ordina</a>
 			</td>
 		</tr>
 		<%
