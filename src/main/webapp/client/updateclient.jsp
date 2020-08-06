@@ -16,7 +16,7 @@
   <a  href="ItemServlet?mode=itemlist">Articoli</a>
   <a  href="OrderServlet?mode=orderlist">Ordini</a>
   <a href="LogoutServlet" id="logout">Logout</a>
-</div>
+  </div>
 <br>
 
 <div class="main">
