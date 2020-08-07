@@ -16,8 +16,10 @@
 				<label for="pass">Password: </label>
 			
 				 <input type="password" id="pass" name="password" placeholder="Insert password">
-		
+		<div>
 			<button type="submit" value="Login" name="pulsante">Login</button>
+			<a href="register.jsp"><input type="button" value="Registrati" name="pulsante"></a>
+		</div>
 		</form>
 
 	
