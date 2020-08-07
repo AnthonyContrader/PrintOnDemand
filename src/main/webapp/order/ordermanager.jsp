@@ -46,7 +46,9 @@
 			<th></th>
 		</tr>
 		<%
+			int i=0;
 			for (OrderDTO u : list) {
+				i++;
 		%>
 		<tr>
 			<td><a href=ClientServlet?mode=read&idclient=<%=u.getClientId() %>>
@@ -63,6 +65,11 @@
 		</tr>
 		<%
 			}
+			if(i==0){
+		%>
+		<td colspan="6">Nessun ordine effettuato.</tr>
+		<%
+		}
 		%>
 	</table>
 
@@ -78,8 +85,9 @@
  			<%if(!clist.isEmpty()){%>
  			<select id="idcl" name="IDclient">
  			<%
- 				for (ClientDTO c: clist){
  			
+ 				for (ClientDTO c: clist){
+ 				
  			%>
   				<option value=<%=c.getIdclient() %>><%=c.getName() %> , <%=c.getAddress() %></option>
   			<% 

@@ -156,7 +156,23 @@ public class OrderServlet extends HttpServlet {
 			dtoi.setLink(link);
 			ans = servItem.update(dtoi);
 			updateList(request);
-			
+			if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) {
+				List<ClientDTO> fclist=(List<ClientDTO>) request.getAttribute("clist");
+				List<OrderDTO> flist=(List<OrderDTO>) request.getAttribute("list");
+				for (ClientDTO t: fclist) {
+					if(logged.getId()==t.getUserId()) {
+						
+						for(OrderDTO u: flist) {
+							if(t.getIdclient()==u.getClientId())
+								list.add(u);
+								
+						}
+						fcflist.add(t);
+					}
+				}				
+				request.setAttribute("list", list);
+				request.setAttribute("clist", fcflist);
+			}
 			getServletContext().getRequestDispatcher("/order/ordermanager.jsp").forward(request, response);
 			break;
 		}

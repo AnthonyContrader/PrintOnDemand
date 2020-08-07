@@ -31,7 +31,7 @@
     </div>
     <div class="col-75">
       <input
-			type="text" id="nome" name="nome" value=<%=u.getName()%>> 
+			type="text" id="nome" name="nome" value="<%=u.getName()%>"> 
     </div>
   </div>
   <div class="row">
@@ -40,7 +40,7 @@
     </div>
     <div class="col-75">
       <input
-			type="text" id="cognome" name="cognome" value=<%=u.getSurname()%>> 
+			type="text" id="cognome" name="cognome" value="<%=u.getSurname()%>"> 
     </div>
   </div>
     <div class="row">
@@ -49,7 +49,7 @@
     </div>
     <div class="col-75">
       <input
-			type="text" id="indirizzo" name="indirizzo" value=<%=u.getAddress()%>> 
+			type="text" id="indirizzo" name="indirizzo" value="<%=u.getAddress()%>"> 
     </div>
   </div>
       <button type="submit" >Edit</button>

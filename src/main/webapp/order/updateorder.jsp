@@ -22,7 +22,7 @@
 
 <%ItemDTO u = (ItemDTO) request.getAttribute("dto");%>
 
-
+<p>SE SEI QUI, E' UN ERRORE. LA PAGINA E' DISABILITATA.</p> 
 <form id="floatleft" action="OrderServlet?mode=update&iditem=<%=u.getId() %>" method="post">
   <div class="row">
     <div class="col-25">

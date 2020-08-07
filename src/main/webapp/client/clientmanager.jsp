@@ -42,7 +42,9 @@
 			<th></th>
 		</tr>
 		<%
+		int i=0;
 			for (ClientDTO u : list) {
+				i++;
 		%>
 		<tr>
 			<td><a href=ClientServlet?mode=read&idclient=<%=u.getIdclient() %>>
@@ -60,6 +62,11 @@
 		</tr>
 		<%
 			}
+			if(i==0){
+		%>
+		<td colspan="6">Nessun indirizzo inserito.</tr>
+		<%
+		}
 		%>
 	</table>
 

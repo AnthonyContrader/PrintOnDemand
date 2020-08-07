@@ -31,7 +31,6 @@ public class ClientServlet extends HttpServlet {
 			List<ClientDTO> list=new ArrayList<>();
 			for ( ClientDTO u: listDTO) {
 				if((u.getUserId() == logged.getId() )) { 
-					System.out.println(u);
 					list.add(u);
 				}				
 			}

@@ -35,7 +35,7 @@ String usertype=((UserDTO)request.getSession().getAttribute("user")).getUsertype
 		<th>Colore</th>
 		<th>Taglia</th>
 		
-		<% if ( (usertype.compareTo("ADMIN")==0) || ( ((u.getImmagine() != null) || (u.getImmagine().compareTo("")!=0)) && (u.getLink() != null || (u.getLink().compareTo("")!=0) ))){
+		<% if ( (usertype.compareTo("ADMIN")==0) || ( ((u.getImmagine() != "null") || (u.getImmagine().compareTo("")!=0)) && (u.getLink() != "null" || (u.getLink().compareTo("")!=0) ))){
 		%>
 		<th>Immagine</th>
 		<th>QRLink</th>
@@ -51,7 +51,7 @@ String usertype=((UserDTO)request.getSession().getAttribute("user")).getUsertype
 		<td> <%=u.getColore()%></td>
 		<td> <%=u.getTaglia()%></td>
 		
-		<% if( (usertype.compareTo("ADMIN")==0) || ( ((u.getImmagine() != null) || (u.getImmagine().compareTo("")!=0)) && (u.getLink() != null || (u.getLink().compareTo("")!=0) ))) {
+		<% if( (usertype.compareTo("ADMIN")==0) || ( ((u.getImmagine() != "null") || (u.getImmagine().compareTo("")!=0)) && (u.getLink() != "null" || (u.getLink().compareTo("")!=0) ))) {
 		%>
 		<td> <%=u.getImmagine()%></td>
 		<td> <%=u.getLink()%></td>

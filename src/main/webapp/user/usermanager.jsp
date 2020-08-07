@@ -22,6 +22,9 @@
 <div class="main">
 	<%
 		List<UserDTO> list = (List<UserDTO>) request.getAttribute("list");
+	UserDTO logged=(UserDTO)request.getSession().getAttribute("user");
+    String usertype=logged.getUsertype();
+    int userid=logged.getId();
 	%>
 
 <br>
@@ -31,23 +34,32 @@
 			<th>Username</th>
 			<th>Password</th>
 			<th>Usertype</th>
-			<th></th>
+			<%if(usertype.compareTo("ADMIN")==0){ 
+	%><th></th>
 			<th></th>
 		</tr>
 		<%
+			}
 			for (UserDTO u : list) {
 		%>
 		<tr>
+		<%if((u.getId()==userid)||(usertype.compareTo("ADMIN")==0)){ 
+	%>
 			<td><a href=UserServlet?mode=read&id=<%=u.getId()%>>
 					<%=u.getUsername()%>
 			</a></td>
 			<td><%=u.getPassword()%></td>
 			<td><%=u.getUsertype()%></td>
+			<%}
+		%>
+			<%if(usertype.compareTo("ADMIN")==0){ 
+			%>
 			<td><a href=UserServlet?mode=read&update=true&id=<%=u.getId()%>>Edit</a>
 			</td>
 			<td><a href=UserServlet?mode=delete&id=<%=u.getId()%>>Delete</a>
 			</td>
-
+			<%}
+			%>
 		</tr>
 		<%
 			}
@@ -55,6 +67,8 @@
 	</table>
 
 
+<%if(usertype.compareTo("ADMIN")==0){ 
+	%>
 
 <form id="floatright" action="UserServlet?mode=insert" method="post">
   <div class="row">
@@ -87,7 +101,9 @@
   </div>
       <button type="submit" >Insert</button>
 </form>
-
+<%
+}
+%>
 </div>
 <br>
 <%@ include file="../css/footer.jsp" %>
