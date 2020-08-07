@@ -48,6 +48,7 @@ public class OrderServlet extends HttpServlet {
 		String mode = request.getParameter("mode");
 		List<OrderDTO> list=new ArrayList<>();
 		List<ClientDTO> fcflist=new ArrayList<>();
+		UserDTO logged= (UserDTO) session.getAttribute("user");
 		OrderDTO dto;
 		ItemDTO dtoi;
 		int id;
@@ -57,7 +58,6 @@ public class OrderServlet extends HttpServlet {
 		switch (mode.toUpperCase()) {
 		case "ORDERLIST":
 			updateList(request);
-			UserDTO logged= (UserDTO) session.getAttribute("user");
 			if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) {
 				List<ClientDTO> fclist=(List<ClientDTO>) request.getAttribute("clist");
 				List<OrderDTO> flist=(List<OrderDTO>) request.getAttribute("list");
@@ -74,9 +74,8 @@ public class OrderServlet extends HttpServlet {
 				}				
 				request.setAttribute("list", list);
 				request.setAttribute("clist", fcflist);
-			}else 
+			}
 			
-					
 			
 			if(request.getParameter("iditem")!=null) {
 				dtoi=servItem.read(Integer.parseInt(request.getParameter("iditem")));
@@ -120,6 +119,23 @@ public class OrderServlet extends HttpServlet {
 			//else ans=false;
 			request.setAttribute("ans",ans);
 			updateList(request);
+			if((logged.getUsertype()).toUpperCase().compareTo("USER")==0) {
+				List<ClientDTO> fclist=(List<ClientDTO>) request.getAttribute("clist");
+				List<OrderDTO> flist=(List<OrderDTO>) request.getAttribute("list");
+				for (ClientDTO t: fclist) {
+					if(logged.getId()==t.getUserId()) {
+						
+						for(OrderDTO u: flist) {
+							if(t.getIdclient()==u.getClientId())
+								list.add(u);
+								
+						}
+						fcflist.add(t);
+					}
+				}				
+				request.setAttribute("list", list);
+				request.setAttribute("clist", fcflist);
+			}
 			getServletContext().getRequestDispatcher("/order/ordermanager.jsp").forward(request, response);
 			break;
 		case "UPDATE":
@@ -140,6 +156,7 @@ public class OrderServlet extends HttpServlet {
 			dtoi.setLink(link);
 			ans = servItem.update(dtoi);
 			updateList(request);
+			
 			getServletContext().getRequestDispatcher("/order/ordermanager.jsp").forward(request, response);
 			break;
 		}
