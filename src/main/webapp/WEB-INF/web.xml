@@ -11,6 +11,14 @@
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>it.contrader.servlets.LogoutServlet</servlet-class>
   </servlet>
+    <servlet>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <servlet-class>it.contrader.servlets.RegistrationServlet</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <url-pattern>/RegistrationServlet</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>

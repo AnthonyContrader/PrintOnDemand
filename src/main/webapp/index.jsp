@@ -5,7 +5,7 @@
 
 <title>Login PRINT ON DEMAND</title>
 </head>
-<body>
+<body class="bg">
 
 		<form class="login" action="LoginServlet" method="post">
 
