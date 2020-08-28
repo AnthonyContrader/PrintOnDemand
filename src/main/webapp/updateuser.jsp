@@ -15,11 +15,14 @@
 <body>
 <%@ include file="./css/header.jsp" %>
 <div class="navbar">
-  <a href="/homeadmin.jsp">Home</a>
+  <a  href="/homeadmin.jsp">Home</a>
   <a class="active" href="/user/getall">Users</a>
+  <a href="/client/getall">Profilo</a>
+  <a  href="/item/getall">Articoli</a>
+  <a href="/order/getall?id=0">Ordini</a>
   <a href="/user/logout" id="logout">Logout</a>
-</div>
-<br>
+  </div>
+  <br>
 <div class="main">
 
 <%UserDTO u = (UserDTO) request.getSession().getAttribute("dto");%>

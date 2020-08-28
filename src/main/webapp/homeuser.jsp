@@ -21,7 +21,7 @@
 
 
 <div class="navbar">
-  <a class="active" href="/homeadmin.jsp">Home</a>
+  <a class="active" href="/homeuser.jsp">Home</a>
   <a  href="/user/getall">Users</a>
   <a href="/client/getall">Profilo</a>
   <a  href="/item/getall">Articoli</a>

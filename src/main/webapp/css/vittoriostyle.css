@@ -2,6 +2,18 @@
 html {
   scroll-behavior: smooth;
 }
+.zoom {
+  transition: transform .4s; /* Animation */
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+z-scale:1;
+  transform: scale(3.04) translate(30px,10px); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+
+}
 * {
 	font-family: sans-serif;
 }
@@ -12,6 +24,9 @@ div.text{
 }
 
 .header {
+	background-image: url("/css/sfondo.jpg");
+	background-size:100% auto;
+	background-position: center;
 	text-align: center;
 	font-size: 800%;
 	font-family: sans-serif;
@@ -65,7 +80,12 @@ h2 {
 
 	
 }
+.bg{
+	background-image: url("/css/alpaca.jpg");
+	background-size:cover;
+}
 .login{
+
 	position:fixed;
 	heigth:50%;
 	width:20%;
@@ -211,6 +231,18 @@ form {
 	padding: 20px;
 }
 
+.uploadd {
+	width: 35%;
+	border-radius: 7px;
+	background-color: #f2f2f2;
+	padding: 20px;
+}
+.artform{
+	width: 30%;
+	border-radius: 7px;
+	background-color: #f2f2f2;
+	padding: 8px;
+}
 .col-25 {
   float: left;
   width: 25%;
@@ -223,6 +255,11 @@ form {
   margin-top: 6px;
 }
 
+.col-70 {
+  float: left;
+  width: 70%;
+  margin-top: 6px;
+}
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -261,7 +298,30 @@ button:hover {
   color: white;
 }
 
+.registrazione {
+  -webkit-transition-duration: 0.1s; /* Safari */
+  transition-duration: 0.1s;
+  background-color:  #00a990;
+  border: none;
+  color: white;
+  padding: 3% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 130%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  cursor: pointer;
+  border-radius: 7px;
+  width:80%;
+}
 
+.registrazione:hover {
+  background-color:  #00ccad; 
+  color: white;
+}
 
 /*IDs*/
 #logout {
@@ -278,12 +338,13 @@ button:hover {
 #floattop {
 	float:top;
 }
-#floatright {
+#floatbottom {
 	float:bottom;
 }
 
 /*Navigation bar*/
 div.navbar {
+	z-scale:-1;
 	background: #00a990;
 	overflow: hidden;
 	position: sticky;
@@ -296,6 +357,7 @@ div.navbar {
 }
 
 div.navbar a {
+	z-scale:-1;
 	float: left;
 	display: block;
 	color: #ffffff;
@@ -308,11 +370,13 @@ div.navbar a {
 }
 
 div.navbar a:hover {
+	z-scale:-1;
 	background: #00ccad;
 	color: #ffffff;
 }
 
 div.navbar a.active {
+	z-scale:-1;
 	background: #00ccad;
 	color: #ffffff;
 }

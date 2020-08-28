@@ -1,5 +1,5 @@
 
-<html lang="en">
+<html lang="en" class="bg">
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -18,8 +18,9 @@
 
 
 <body class="text-center">
+<div class="bg">
 	<form class="login" action="/user/login" method="post">
-		<h1>SAMPLE LOGIN</h1>
+		<h1>PrintOnDemand Login</h1>
 
 		<label for="inputUser" class="sr-only">Username</label> <input
 			type="text" name="username" id="inputUser" class="form-control"
@@ -29,9 +30,9 @@
 			class="form-control" placeholder="Password" required> <input
 			type="hidden" name="richiesta" value="login">
 
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Log
-			in</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+<a href="/registration.jsp"><input class="registrazione" type="button" value="Registrati" name="pulsante"></a>
 	</form>
-
+</div>
 </body>
 </html>

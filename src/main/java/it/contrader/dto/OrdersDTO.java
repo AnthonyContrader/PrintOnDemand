@@ -1,6 +1,6 @@
 package it.contrader.dto;
 
-import it.contrader.model.User.Usertype;
+import it.contrader.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,14 +9,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class UserDTO {
+public class OrdersDTO {
+
+	private Client client;
+	
+	private Item item;
+
+	private String data;
+
+	private String prezzo;
 
 	private long id;
-
-	private String username;
-
-	private String password;
-
-	private String usertype;
 
 }

@@ -15,6 +15,7 @@ public abstract class AbstractService<Entity, DTO> implements ServiceDTO<DTO> {
 	protected CrudRepository<Entity, Long> crudRepository;
 	@Autowired
 	protected Converter<Entity, DTO> converter;
+	
 
 	public AbstractService() {
 	}

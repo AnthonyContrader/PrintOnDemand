@@ -29,11 +29,11 @@ public class UserController {
 
 		switch (userDTO.getUsertype()) {
 
-		case ADMIN:
+		case "ADMIN":
 			return "homeadmin";
 
-		case USER:
-			return "index";
+		case "USER":
+			return "homeuser";
 
 		default:
 			return "index";
@@ -47,21 +47,21 @@ public class UserController {
 	}
 
 	@GetMapping("/delete")
-	public String delete(HttpServletRequest request, @RequestParam("id") Long id) {
+	public String delete(HttpServletRequest request, @RequestParam("id") long id) {
 		service.delete(id);
 		setAll(request);
 		return "users";
 	}
 
 	@GetMapping("/preupdate")
-	public String preUpdate(HttpServletRequest request, @RequestParam("id") Long id) {
+	public String preUpdate(HttpServletRequest request, @RequestParam("id") long id) {
 		request.getSession().setAttribute("dto", service.read(id));
 		return "updateuser";
 	}
 
 	@PostMapping("/update")
 	public String update(HttpServletRequest request, @RequestParam("id") Long id, @RequestParam("username") String username,
-			@RequestParam("password") String password, @RequestParam("usertype") Usertype usertype) {
+			@RequestParam("password") String password, @RequestParam("usertype") String usertype) {
 
 		UserDTO dto = new UserDTO();
 		dto.setId(id);
@@ -76,18 +76,18 @@ public class UserController {
 
 	@PostMapping("/insert")
 	public String insert(HttpServletRequest request, @RequestParam("username") String username,
-			@RequestParam("password") String password, @RequestParam("usertype") Usertype usertype) {
+			@RequestParam("password") String password, @RequestParam("usertype") String usertype) {
 		UserDTO dto = new UserDTO();
 		dto.setUsername(username);
 		dto.setPassword(password);
 		dto.setUsertype(usertype);
-		service.insert(dto);
+		service.update(dto);
 		setAll(request);
 		return "users";
 	}
 
 	@GetMapping("/read")
-	public String read(HttpServletRequest request, @RequestParam("id") Long id) {
+	public String read(HttpServletRequest request, @RequestParam("id") long id) {
 		request.getSession().setAttribute("dto", service.read(id));
 		return "readuser";
 	}
