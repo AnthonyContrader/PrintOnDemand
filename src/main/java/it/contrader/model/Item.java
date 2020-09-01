@@ -24,19 +24,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-	
-	
-
+public class Item {
+		
+	private String nome;
+	private String descrizione;
+	private String tipo;
+	private String colore;
+	private String taglia;
+	private String immagine;
+	private String link;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column(unique = true)
-	private String username;
-	
-	private String password;
-
-	private String usertype;
 	
 }
