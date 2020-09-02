@@ -9,7 +9,8 @@ import { LayoutModule } from './layout/layout.module';
 import { AdminModule } from './admin/admin.module';
 import { UserService } from 'src/service/user.service';
 import { ClientService } from 'src/service/client.service';
-
+import { ItemService } from 'src/service/item.service';
+import { UserModule } from './user/user.module';
 /** 
  * Modulo principale dell'applicazione. Qui vengono importati i moduli secondari. L'UNICA component
  * da dichiare qui è l'AppComponent, tutte le altre devono essere dichiarate nel loro modulo e questo importato
@@ -27,11 +28,13 @@ import { ClientService } from 'src/service/client.service';
     LoginModule,
     HttpClientModule,
     LayoutModule,
-    AdminModule
+    AdminModule,
+    UserModule
   ],
   providers: [
     UserService,
-    ClientService
+    ClientService,
+    ItemService
 
   ],
   bootstrap: [AppComponent]

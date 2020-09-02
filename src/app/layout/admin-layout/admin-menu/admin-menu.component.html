@@ -15,10 +15,10 @@
                     <a [routerLink]="['/admin-dashboard/client']"> <i class="fas fa-edit" style="margin-right: 10px">
                     </i>Edit Client</a>
                 </button>
-                <button class="menubtn" style="background-color: #334247; padding-left: 40px">
+                <!--<button class="menubtn" style="background-color: #334247; padding-left: 40px">
                     <a [routerLink]="['/admin-dashboard/work-in-progress']"><i class="fas fa-file-alt"
                             style="margin-right: 15px"></i>General Info</a>
-                </button>
+                </button>-->
             </div>
 
             <button type="button" class="menubtn" data-toggle="collapsebtn" data-target="#item"
@@ -27,7 +27,7 @@
         </button>
         <div class="collapsebtn" id="item" *ngIf="isItemCollapsed">
             <button class="menubtn" style="background-color: #334247; padding-left: 40px">
-                <a [routerLink]="['/admin-dashboard/work-in-progress']"> <i class="fas fa-user-edit"
+                <a [routerLink]="['/admin-dashboard/item']"> <i class="fas fa-user-edit"
                         style="margin-right: 15px"></i>
                     Edit Articoli</a>
             </button>
@@ -39,7 +39,7 @@
     </button>
     <div class="collapsebtn" id="orders" *ngIf="isOrdersCollapsed">
         <button class="menubtn" style="background-color: #334247; padding-left: 40px">
-            <a [routerLink]="['/admin-dashboard/work-in-progress']"> <i class="fas fa-user-edit"
+            <a [routerLink]="['/admin-dashboard/orders']"> <i class="fas fa-user-edit"
                     style="margin-right: 15px"></i>
                 View Orders</a>
         </button>

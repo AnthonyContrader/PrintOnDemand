@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminLayoutComponent } from '../layout/admin-layout/admin-layout.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UsersComponent } from './users/users.component';
-import { WorkInProgressComponent } from './work-in-progress/work-in-progress.component';
 import { ClientComponent } from './client/client.component';
 import { ItemComponent } from './item/item.component';
 import { OrdersComponent } from './orders/orders.component';
+import { UserLayoutComponent } from '../layout/user-layout/user-layout.component';
 
 /**
  * Modulo di routing dell'admin. Qui ci sono i percorsi che un admin può seguire:
@@ -21,18 +20,19 @@ import { OrdersComponent } from './orders/orders.component';
  * @see layout
  */
 const routes: Routes = [
-  { path: 'admin-dashboard', component: AdminLayoutComponent, children:[
-    { path: '', component: AdminDashboardComponent},
+  { path: 'user-dashboard', component: UserLayoutComponent, children:[
+    { path: '', component: UserDashboardComponent},
     { path: 'users', component: UsersComponent},
-    { path: 'work-in-progress', component: WorkInProgressComponent},
+    //{ path: 'work-in-progress', component: WorkInProgressComponent},
     { path: 'client', component: ClientComponent},
     { path: 'item', component: ItemComponent},
-    { path: 'orders', component: OrdersComponent}
+     {path: 'orders', component: OrdersComponent}
   ]}
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class UserRoutingModule { }
