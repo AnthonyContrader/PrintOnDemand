@@ -24,6 +24,9 @@
           <th>
             Clear
           </th>
+          <th>
+            Read
+          </th>
         </tr>
         <tr>
           <td>
@@ -43,6 +46,8 @@
           </td>
           <td>
             <button (click)="clear()">Clear</button>
+          </td>
+          <td>
           </td>
         </tr>
         <tr *ngFor="let client of clients">
@@ -64,9 +69,56 @@
           <td>
             <button (click)="delete(client)">Delete</button>
           </td>
+          <td>
+            <button (click)="select(client)">Read</button>
+          </td>
+        </tr>
+      </table>
+    
+      <table *ngIf="isselected">
+        <tr>
+          <th>
+            clientID
+          </th>
+          <th>
+            Nome
+          </th>
+          <th>
+            Cognome
+          </th>
+          <th>
+            Indirizzo
+          </th>
+          <th>
+            userID
+          </th>
+          <th>
+
+        </th>
+        </tr>
+        <tr>
+            <td>
+          {{selected.id}} 
+          </td>
+            <td>
+                {{selected.nome}}
+          </td>
+          <td>
+              {{selected.cognome}}
+          </td>
+          <td>
+              {{selected.indirizzo}}
+          </td>
+          <td>
+              {{selected.userID}}
+          </td>
+          <td>
+              <button (click)="closeread()">Close</button>
+          </td>
         </tr>
       </table>
     </div>
+    
     <div class="col-md-1">
 
     </div>

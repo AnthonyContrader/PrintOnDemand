@@ -9,6 +9,7 @@ import { ClientDTO } from 'src/dto/clientdto';
 })
 export class ClientComponent implements OnInit {
 
+  isselected: boolean=false;
   selected: ClientDTO;
   clients: ClientDTO[];
   clienttoinsert: ClientDTO = new ClientDTO();
@@ -45,6 +46,11 @@ export class ClientComponent implements OnInit {
   
   select(reviews: ClientDTO) {
     this.selected = reviews;
+    this.isselected=true;
+    return this.selected;
+  }
+  closeread() {
+    this.isselected=false;
   }
 }
 
