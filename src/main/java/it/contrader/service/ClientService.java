@@ -16,5 +16,7 @@ public class ClientService extends AbstractService<Client,ClientDTO> {
 	public ClientDTO findById(long id) {
 		return converter.toDTO(((ClientRepository)repository).findById(id));
 	}
+	
+	//CRUD complete
 
 }
