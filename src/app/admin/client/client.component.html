@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-10">
+      <table>
+        <tr>
+          <th>
+            userID
+          </th>
+          <th>
+            Nome
+          </th>
+          <th>
+            Cognome
+          </th>
+          <th>
+            Indirizzo
+          </th>
+          <th>
+            Edit
+          </th>
+          <th>
+            Clear
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input placeholder="userID" [(ngModel)]="clienttoinsert.userID">
+          </td>
+          <td>
+            <input placeholder="Nome" [(ngModel)]="clienttoinsert.nome">
+          </td>
+          <td>
+            <input placeholder="Cognome" [(ngModel)]="clienttoinsert.cognome">
+          </td>
+          <td>
+            <input placeholder="Indirizzo" [(ngModel)]="clienttoinsert.indirizzo">
+          </td>
+          <td>
+            <button (click)="insert(clienttoinsert)">Insert</button>
+          </td>
+          <td>
+            <button (click)="clear()">Clear</button>
+          </td>
+        </tr>
+        <tr *ngFor="let client of clients">
+            <td>
+                <input [(ngModel)]="client.userID">
+          </td>
+          <td>
+            <input [(ngModel)]="client.nome">
+          </td>
+          <td>
+            <input [(ngModel)]="client.cognome">
+          </td>
+          <td>
+            <input [(ngModel)]="client.indirizzo">
+          </td>
+          <td>
+            <button (click)="update(client)">Save</button>
+          </td>
+          <td>
+            <button (click)="delete(client)">Delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+</div>
