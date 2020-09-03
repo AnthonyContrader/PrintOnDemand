@@ -52,25 +52,26 @@
           </td>
         </tr>
         <tr *ngFor="let client of clients">
-            <td *ngIf="user.id===client.userID">
-                <input [(ngModel)]="client.userID">
+            <td *ngIf="checkuser(client)">
+                <input type="hidden" [(ngModel)]="client.userID">
+                {{client.userID}}
           </td>
-          <td *ngIf="user.id===client.userID">
+          <td *ngIf="checkuser(client)">
             <input [(ngModel)]="client.nome">
           </td>
-          <td *ngIf="user.id==client.userID">
+          <td *ngIf="checkuser(client)">
             <input [(ngModel)]="client.cognome">
           </td>
-          <td *ngIf="user.id==client.userID">
+          <td *ngIf="checkuser(client)">
             <input [(ngModel)]="client.indirizzo">
           </td>
-          <td *ngIf="user.id==client.userID">
+          <td *ngIf="checkuser(client)">
             <button (click)="update(client)">Save</button>
           </td>
-          <td *ngIf="user.id==client.userID">
+          <td *ngIf="checkuser(client)">
             <button (click)="delete(client)">Delete</button>
           </td>
-          <td *ngIf="user.id==client.userID">
+          <td *ngIf="checkuser(client)">
             <button (click)="select(client)">Read</button>
           </td>
         </tr>

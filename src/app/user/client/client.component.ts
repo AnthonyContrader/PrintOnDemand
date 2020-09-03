@@ -57,6 +57,13 @@ export class ClientComponent implements OnInit {
   closeread() {
     this.isselected=false;
   }
+  checkuser(review: ClientDTO){
+    if(this.user.id===review.userID)
+     {
+      return true;
+    }
+    else return false;
+  }
 }
 
 
