@@ -9,6 +9,7 @@ import { BehaviorSubject, Subject, Subscriber } from 'rxjs';
 import { UserDTO } from 'src/dto/userdto';
 import { defineDirective } from '@angular/core/src/render3';
 import { defaultComparator } from '@angular/common/src/pipes/keyvalue_pipe';
+import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -24,6 +25,7 @@ export class OrdersComponent implements OnInit {
   selectedi: ItemDTO;
   orders: OrdersDTO[]=[];
   clients: ClientDTO[]=[];
+  it: ItemDTO;
   defd: ClientDTO[];
   items: ItemDTO[]=[];
   listits: ItemDTO[];
@@ -50,28 +52,19 @@ export class OrdersComponent implements OnInit {
         this.length=this.clients.push(cl);
       }
     });
-
     this.servicei.getAll().subscribe((items: ItemDTO[]) => {
       for(let it of items) {
         if((it.immagine==="" || it.immagine===null ) && (it.link==="" || it.immagine===null)) this.length=this.items.push(it);
       }
     });
+    this.allOrders();
 
     //this.servicec.getAll().subscribe(clients => this.clients = clients);
 
   
-    this.service.getAll().subscribe(orders => {
-      
-      //this.orders = orders
-    for(let client of this.clients)
-    {
-      for(let order of orders)
-      {
-        if(client.id===order.idclient) this.orders.push(order);
-      }
-    }
+
     
-    });
+    
     //this.servicei.getAll().subscribe(items => this.items = items);
   }
 
@@ -85,32 +78,30 @@ export class OrdersComponent implements OnInit {
 
   insert(order: OrdersDTO) {
     order.data=this.sdata;
-    this.servicei.read(order.iditem).subscribe(itm=>{
-      this.duplicateit=new ItemDTO();
-      this.duplicateit.nome=itm.nome;
-      this.duplicateit.descrizione=itm.descrizione;
-      this.duplicateit.tipo=itm.tipo;
-      this.duplicateit.colore=itm.colore;
-      this.duplicateit.taglia=itm.taglia;
-      this.duplicateit.immagine=itm.immagine;
-      this.duplicateit.link=itm.link;
-
-    
-    });
-    console.log(this.duplicateit.nome);
-    //console.log(this.duplicateit.nome+this.duplicateit.descrizione+this.duplicateit.tipo+this.duplicateit.colore+this.duplicateit.taglia);
-    //this.servicei.insert(this.duplicateit).subscribe(()=>{});
-    /*let tempobs: ItemDTO[]=[];
+    this.it.id=0;
     let temp: ItemDTO[]=[];
-    this.servicei.getAll().subscribe((t: ItemDTO[])=>{tempobs=t});
-    for(let ordtmp of tempobs){
-    temp.push(ordtmp);
-    }
-    order.iditem=(temp.pop()).id;
-    this.service.insert(order).subscribe(() => {this.getOrders()});*/
+    this.servicei.insert(this.it).subscribe(()=>{},undefined,()=>{this.servicei.getAll().subscribe((t: ItemDTO[])=>{
+      for(let ordtmp of t) this.length=temp.push(ordtmp);
+      order.iditem=(temp.pop()).id}
+      ,undefined,()=>{this.service.insert(order).subscribe(()=>{},undefined,()=>{this.orders.push(order);})})});
+    
+    //console.log(this.duplicateit.nome+this.duplicateit.descrizione+this.duplicateit.tipo+this.duplicateit.colore+this.duplicateit.taglia);
+    //this.servicei.insert(this.it);
+    //let tempobs: ItemDTO[]=[];
+ 
+      
+    /*this.servicei.getAll().subscribe((t: ItemDTO[])=>{
+      for(let ordtmp of t) this.length=temp.push(ordtmp);
+      order.iditem=(temp.pop()).id;
+      console.log(order.iditem);
+      this.service.insert(order).subscribe(() => {this.allClient();});
+      });*/
+      
+      
   }
 
   clear(){
+    console.log(this.length);
     this.orderstoinsert = new OrdersDTO();
   }
   
@@ -143,6 +134,9 @@ export class OrdersComponent implements OnInit {
     this.sdata=d.getFullYear()+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+("0"+d.getDate()).slice(-2)+" "+d.getHours()+":"+d.getMinutes()+":"+("0"+d.getSeconds()).slice(-2);
     return this.sdata;
   }
+  save(item: ItemDTO){
+    this.it=item;
+  }
   /*checkorder(review: number){
     if(this.clients.find(this.readc(review)))
      {
@@ -151,4 +145,19 @@ export class OrdersComponent implements OnInit {
     else return false;
   }
 */
+  allOrders()  {
+    this.service.getAll().subscribe(orders => {
+      
+      //this.orders = orders
+    for(let client of this.clients)
+    {
+      for(let order of orders)
+      {
+        if(client.id===order.idclient) {this.orders.push(order);
+          this.orders.sort((a,b)=>a.data.localeCompare(b.data));
+        }
+      }
+    }
+  });
+  }
 }

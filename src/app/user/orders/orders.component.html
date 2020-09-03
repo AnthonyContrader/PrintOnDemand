@@ -40,7 +40,7 @@
             <td>
               <!--<input  [(ngModel)]="">-->
               <select placeholder="IDitem" [(ngModel)]="orderstoinsert.iditem" >
-              <option *ngFor="let item of items" [selected]="orderstoinsert.iditem===item.id" value={{item.id}}>{{item.nome}}</option>
+              <option *ngFor="let item of items" [selected]="orderstoinsert.iditem===item.id" value={{item.id}}>{{save(item)}}{{item.nome}}</option>
                 </select>
             </td>
             <td>
