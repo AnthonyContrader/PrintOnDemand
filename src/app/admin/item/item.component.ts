@@ -12,16 +12,21 @@ export class ItemComponent implements OnInit {
   isselected: boolean=false;
   selected: ItemDTO;
   items: ItemDTO[];
+  result: ItemDTO[];
   itemtoinsert: ItemDTO = new ItemDTO();
+  searchVal='';
+  filteredItems: ItemDTO[] = [];
   constructor(private service: ItemService) { }
 
   ngOnInit() {
     this.clear();
     this.getItems();
+    
   }
 
   getItems() {
-    this.service.getAll().subscribe(items => this.items = items);
+    this.service.getAll().subscribe(items => {this.items = items; this.result=items});
+    
   }
 
   delete(item: ItemDTO) {
@@ -52,5 +57,17 @@ export class ItemComponent implements OnInit {
   closeread() {
     this.isselected=false;
   }
-
+  checkSearchVal() {    
+    this.filteredItems=[];
+   if (this.searchVal && this.searchVal !== '') {
+      for (let selecteditems of this.items) {
+        if (selecteditems.tipo.toLowerCase().startsWith(this.searchVal.toLowerCase())) {
+          this.filteredItems.push(selecteditems);
+        }
+        this.result=this.filteredItems.slice();
+      }   
+    }else{this.result=this.items;
+  }
 }
+}
+

@@ -22,11 +22,12 @@ export class OrdersComponent implements OnInit {
   selected: OrdersDTO;
   selectedc: ClientDTO;
   selectedi: ItemDTO;
-  orders: OrdersDTO[];
+  orders: OrdersDTO[]=[];
   clients: ClientDTO[]=[];
   defd: ClientDTO[];
   items: ItemDTO[]=[];
   listits: ItemDTO[];
+  duplicateit: ItemDTO;
   length:number;
   sdata:string;
   orderstoinsert: OrdersDTO = new OrdersDTO();
@@ -36,7 +37,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.clear();
     this.getOrders();
-    for(let client of this.clients){ console.log(client.id)}
+    //for(let client of this.clients){ console.log(client.id)}
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     //this.filteritems();
         
@@ -57,12 +58,20 @@ export class OrdersComponent implements OnInit {
     });
 
     //this.servicec.getAll().subscribe(clients => this.clients = clients);
-    /*for(const{index,client} of this.clients.map((client,index)=>({index,client})))
-    {
-      if(!(===client.userID)) console.log((this.clients.splice(index,1)));
-    }*/
+
   
-    this.service.getAll().subscribe(orders => this.orders = orders);
+    this.service.getAll().subscribe(orders => {
+      
+      //this.orders = orders
+    for(let client of this.clients)
+    {
+      for(let order of orders)
+      {
+        if(client.id===order.idclient) this.orders.push(order);
+      }
+    }
+    
+    });
     //this.servicei.getAll().subscribe(items => this.items = items);
   }
 
@@ -76,7 +85,29 @@ export class OrdersComponent implements OnInit {
 
   insert(order: OrdersDTO) {
     order.data=this.sdata;
-    this.service.insert(order).subscribe(() => this.getOrders());
+    this.servicei.read(order.iditem).subscribe(itm=>{
+      this.duplicateit=new ItemDTO();
+      this.duplicateit.nome=itm.nome;
+      this.duplicateit.descrizione=itm.descrizione;
+      this.duplicateit.tipo=itm.tipo;
+      this.duplicateit.colore=itm.colore;
+      this.duplicateit.taglia=itm.taglia;
+      this.duplicateit.immagine=itm.immagine;
+      this.duplicateit.link=itm.link;
+
+    
+    });
+    console.log(this.duplicateit.nome);
+    //console.log(this.duplicateit.nome+this.duplicateit.descrizione+this.duplicateit.tipo+this.duplicateit.colore+this.duplicateit.taglia);
+    //this.servicei.insert(this.duplicateit).subscribe(()=>{});
+    /*let tempobs: ItemDTO[]=[];
+    let temp: ItemDTO[]=[];
+    this.servicei.getAll().subscribe((t: ItemDTO[])=>{tempobs=t});
+    for(let ordtmp of tempobs){
+    temp.push(ordtmp);
+    }
+    order.iditem=(temp.pop()).id;
+    this.service.insert(order).subscribe(() => {this.getOrders()});*/
   }
 
   clear(){
@@ -105,22 +136,19 @@ export class OrdersComponent implements OnInit {
   readc(reviews: number){
     this.servicec.read(reviews).subscribe(sel=>this.selectedc=sel);
     this.isselectedc=true;
-    return this.selectedi;
+    return this.selectedc;
   }
   dataora(){
     let d= new Date();
     this.sdata=d.getFullYear()+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+("0"+d.getDate()).slice(-2)+" "+d.getHours()+":"+d.getMinutes()+":"+("0"+d.getSeconds()).slice(-2);
     return this.sdata;
   }
- /*filteritems(){
-    
-    
-   for(let i=0;i<this.orders.length; i++){
-     
-    this.servicei.read(this.orders[i].iditem).subscribe(item => this.selectedi=item);
-    this.listits[i]=this.selectedi;
-
-   }
-   for(let it of this.listits) console.log(it);
-  }*/
+  /*checkorder(review: number){
+    if(this.clients.find(this.readc(review)))
+     {
+      return true;
+    }
+    else return false;
+  }
+*/
 }

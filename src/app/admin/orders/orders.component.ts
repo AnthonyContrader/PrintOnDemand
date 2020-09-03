@@ -22,6 +22,7 @@ export class OrdersComponent implements OnInit {
   orders: OrdersDTO[]=[];
   clients: ClientDTO[];
   items: ItemDTO[];
+  sdata:string;
   listits: ItemDTO[]=[];
   orderstoinsert: OrdersDTO = new OrdersDTO();
   constructor(private service: OrdersService, private servicei: ItemService, private servicec: ClientService) { }
@@ -48,6 +49,7 @@ export class OrdersComponent implements OnInit {
   }
 
   insert(order: OrdersDTO) {
+    order.data=this.sdata;
     this.service.insert(order).subscribe(() => this.getOrders());
   }
 
@@ -79,17 +81,11 @@ export class OrdersComponent implements OnInit {
     this.isselectedc=true;
     return this.selectedi;
   }
- /*filteritems(){
-    
-    
-   for(let i=0;i<this.orders.length; i++){
-     
-    this.servicei.read(this.orders[i].iditem).subscribe(item => this.selectedi=item);
-    this.listits[i]=this.selectedi;
-
-   }
-   for(let it of this.listits) console.log(it);
-  }*/
+  dataora(){
+    let d= new Date();
+    this.sdata=d.getFullYear()+"/"+("0"+(d.getMonth()+1)).slice(-2)+"/"+("0"+d.getDate()).slice(-2)+" "+d.getHours()+":"+d.getMinutes()+":"+("0"+d.getSeconds()).slice(-2);
+    return this.sdata;
+  }
 }
 
 

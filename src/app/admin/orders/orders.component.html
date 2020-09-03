@@ -19,6 +19,12 @@
               Prezzo
             </th>
             <th>
+                Immagine
+                </th>
+                <th>
+                QRLink
+                </th> 
+            <th>
               Edit
             </th>
             <th>
@@ -38,11 +44,14 @@
                 </select>
             </td>
             <td>
-              <input placeholder="Data" [(ngModel)]="orderstoinsert.data">
+                {{dataora()}}
             </td>
             <td>
-              <input placeholder="Indirizzo" [(ngModel)]="orderstoinsert.prezzo">
+              <input placeholder="Prezzo" [(ngModel)]="orderstoinsert.prezzo">
             </td>
+            <td colspan="2">
+                <h3>Devi prima effettuare l'ordine per personalizzarlo!</h3>
+             </td> 
             <td>
               <button (click)="insert(orderstoinsert)">Insert</button>
             </td>
@@ -67,7 +76,13 @@
               {{order.prezzo}}
             </td>
             <td>
-              <button (click)="update(order)">Save</button>
+            <input type="file" placeholder="Immagine" [(ngModel)]="orderstoinsert.prezzo"><!--Qui ci va l'upload-->
+          </td>
+          <td>
+              <input placeholder="QRLink" [(ngModel)]="orderstoinsert.prezzo"><!--Qui ci va itemtoinsert.qrlink-->
+          </td> 
+            <td>
+              <button (click)="update(order)">Custom</button>
             </td>
 
             <td>
@@ -82,17 +97,15 @@
                   ID
               </th>
               <th>
-                  ID Client
+                  Nome
               </th>
               <th>
-                  ID Item
+                 Cognome
               </th>
               <th>
-                Data
+                Indirizzo
               </th>
-              <th>
-                Prezzo
-              </th>
+
               <th>
     
             </th>
@@ -177,8 +190,12 @@
                 Prezzo
               </th>
               <th>
-    
+                Immagine
             </th>
+            <th>
+                QRLink
+            </th>
+            <th></th>
             </tr>
             <tr>
                 <td>
@@ -195,6 +212,12 @@
               </td>
               <td>
                   {{selected.prezzo}}
+              </td>
+              <td>
+                  {{selectedi.immagine}}
+              </td>
+              <td>
+                  {{selectedi.link}}
               </td>
               <td>
                   <button (click)="closeread()">Close</button>
