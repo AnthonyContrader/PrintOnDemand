@@ -1,120 +1,210 @@
 <div class="container">
-  <div class="row mt-5">
-    <div class="col-md-1">
-
-    </div>
-    <div class="col-md-10">
-      <table>
-        <tr>
-          <th>
-              ID Client
-          </th>
-          <th>
-              ID Item
-          </th>
-          <th>
-            Data
-          </th>
-          <th>
-            Prezzo
-          </th>
-          <th>
-            Edit
-          </th>
-          <th>
-            Clear/Read
-          </th>
-        </tr>
-        <tr>
-          <td>
-            <input placeholder="userID" [(ngModel)]="orderstoinsert.idclient ">
-          </td>
-          <td>
-            <input placeholder="Nome" [(ngModel)]="orderstoinsert.iditem">
-          </td>
-          <td>
-            <input placeholder="Cognome" [(ngModel)]="orderstoinsert.data">
-          </td>
-          <td>
-            <input placeholder="Indirizzo" [(ngModel)]="orderstoinsert.prezzo">
-          </td>
-          <td>
-            <button (click)="insert(orderstoinsert)">Insert</button>
-          </td>
-          <td>
-            <button (click)="clear()">Clear</button>
-          </td>
-
-        </tr>
-        <tr *ngFor="let order of orders">
+    <div class="row mt-5">
+      <div class="col-md-1">
+  
+      </div>
+      <div class="col-md-10">
+        <table>
+          <tr>
+            <th>
+                ID Client
+            </th>
+            <th>
+                ID Item
+            </th>
+            <th>
+              Data
+            </th>
+            <th>
+              Prezzo
+            </th>
+            <th>
+              Edit
+            </th>
+            <th>
+              Clear/Read
+            </th>
+          </tr>
+          <tr>
             <td>
-                <input [(ngModel)]="order.idclient">
-          </td>
-          <td>
-            <input [(ngModel)]="order.iditem">
-          </td>
-          <td>
-            <input [(ngModel)]="order.data">
-          </td>
-          <td>
-            <input [(ngModel)]="order.prezzo">
-          </td>
-          <td>
-            <button (click)="update(order)">Save</button>
-          </td>
+                <select placeholder="IDclient" [(ngModel)]="orderstoinsert.idclient" >
+                    <option *ngFor="let client of clients" [selected]="orderstoinsert.idclient===client.id" value={{client.id}}>{{client.nome}} {{client.cognome}}</option>
+                      </select>
+            </td>
+            <td>
+              <!--<input  [(ngModel)]="">-->
+              <select placeholder="IDitem" [(ngModel)]="orderstoinsert.iditem" >
+              <option *ngFor="let item of items" [selected]="orderstoinsert.iditem===item.id" value={{item.id}}>{{item.nome}}</option>
+                </select>
+            </td>
+            <td>
+              {{dataora()}}
+            </td>
+            <td>
+              <input placeholder="Indirizzo" [(ngModel)]="orderstoinsert.prezzo">
+            </td>
+            <td>
+              <button (click)="insert(orderstoinsert)">Insert</button>
+            </td>
+            <td>
+              <button (click)="clear()">Clear</button>
+            </td>
 
-          <td>
-            <button (click)="select(order)">Read</button>
-          </td>
-        </tr>
-      </table>
+          </tr>
+          <tr *ngFor="let order of orders; let i= index">
+              <td>
+                  <button (click)="readc(order.idclient);" style="width:50px">{{order.idclient}}</button>
+                  
+            </td>
+            <td>
+                
+                <button (click)="readi(order.iditem);" style="width:50px">{{order.iditem}} </button>
+            </td>
+            <td>
+              {{order.data}}
+            </td>
+            <td>
+              {{order.prezzo}}
+            </td>
+            <td>
+              <button (click)="update(order)">Save</button>
+            </td>
+
+            <td>
+              <button (click)="select(order)">Read</button>
+            </td>
+          </tr>
+        </table>
+      
+        <table *ngIf="isselectedc">
+            <tr>
+              <th>
+                  ID
+              </th>
+              <th>
+                  ID Client
+              </th>
+              <th>
+                  ID Item
+              </th>
+              <th>
+                Data
+              </th>
+              <th>
+                Prezzo
+              </th>
+              <th>
     
-      <table *ngIf="isselected">
-        <tr>
-          <th>
-              ID
-          </th>
-          <th>
-              ID Client
-          </th>
-          <th>
-              ID Item
-          </th>
-          <th>
-            Data
-          </th>
-          <th>
-            Prezzo
-          </th>
-          <th>
+            </th>
+            </tr>
+            <tr>
+                <td>
+              {{selectedc.id }} 
+              </td>
+                <td>
+                    {{selectedc.nome}}
+              </td>
+              <td>
+                  {{selectedc.cognome}}
+              </td>
+              <td>
+                  {{selectedc.indirizzo}}
+              </td>
+              <td>
+                  <button (click)="closeread()">Close</button>
+              </td>
+            </tr>
+          </table>
 
-        </th>
-        </tr>
-        <tr>
-            <td>
-          {{selected.id }} 
-          </td>
-            <td>
-                {{selected.idclient}}
-          </td>
-          <td>
-              {{selected.iditem}}
-          </td>
-          <td>
-              {{selected.data}}
-          </td>
-          <td>
-              {{selected.prezzo}}
-          </td>
-          <td>
-              <button (click)="closeread()">Close</button>
-          </td>
-        </tr>
-      </table>
-    </div>
+        <table *ngIf="isselectedi">
+            <tr>
+              <th>
+                  ID
+              </th>
+              <th>
+                  ID Client
+              </th>
+              <th>
+                  ID Item
+              </th>
+              <th>
+                Data
+              </th>
+              <th>
+                Prezzo
+              </th>
+              <th>
     
-    <div class="col-md-1">
+            </th>
+            </tr>
+            <tr>
+                <td>
+              {{selectedi.id }} 
+              </td>
+                <td>
+                    {{selectedi.nome}}
+              </td>
+              <td>
+                  {{selectedi.descrizione}}
+              </td>
+              <td>
+                  {{selectedi.colore}}
+              </td>
+              <td>
+                  {{selectedi.taglia}}
+              </td>
+              <td>
+                  <button (click)="closeread()">Close</button>
+              </td>
+            </tr>
+          </table>
 
+        <table *ngIf="isselected">
+            <tr>
+              <th>
+                  ID
+              </th>
+              <th>
+                  ID Client
+              </th>
+              <th>
+                  ID Item
+              </th>
+              <th>
+                Data
+              </th>
+              <th>
+                Prezzo
+              </th>
+              <th>
+    
+            </th>
+            </tr>
+            <tr>
+                <td>
+              {{selected.id }} 
+              </td>
+                <td>
+                    {{selected.idclient}}
+              </td>
+              <td>
+                  {{selected.iditem}}
+              </td>
+              <td>
+                  {{selected.data}}
+              </td>
+              <td>
+                  {{selected.prezzo}}
+              </td>
+              <td>
+                  <button (click)="closeread()">Close</button>
+              </td>
+            </tr>
+          </table>
+      </div>
+      
+      <div class="col-md-1">
+  
+      </div>
     </div>
   </div>
-</div>

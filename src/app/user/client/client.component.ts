@@ -38,6 +38,7 @@ export class ClientComponent implements OnInit {
   }
 
   insert(client: ClientDTO) {
+    client.userID=this.user.id;
     this.service.insert(client).subscribe(() => this.getClients());
   }
 
