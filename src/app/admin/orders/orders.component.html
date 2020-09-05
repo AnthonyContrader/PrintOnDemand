@@ -18,42 +18,35 @@
             <th>
               Prezzo
             </th>
-            <th>
-                Immagine
-                </th>
-                <th>
-                QRLink
-                </th> 
-            <th>
-              Edit
+
+            <th colspan="2">
+              Upload/Insert
             </th>
-            <th>
+           
+            <th colspan="2">
               Clear/Read
             </th>
           </tr>
           <tr>
             <td>
-                <select placeholder="IDclient" [(ngModel)]="orderstoinsert.idclient" >
-                    <option *ngFor="let client of clients" [selected]="orderstoinsert.idclient===client.id" value={{client.id}}>{{client.nome}} {{client.cognome}}</option>
+                <select placeholder="idclient" [(ngModel)]="orderstoinsert.idclient" >
+                    <option *ngFor="let client of clients" [selected]="orderstoinsert.idclient===client.id" value={{client.id}}> {{client.nome}} {{client.cognome}} </option>
                       </select>
             </td>
             <td>
               <!--<input  [(ngModel)]="">-->
-              <select placeholder="IDitem" [(ngModel)]="orderstoinsert.iditem" >
-              <option *ngFor="let item of items" [selected]="orderstoinsert.iditem===item.id" value={{item.id}}>{{item.nome}}</option>
+              <select placeholder="iditem" [(ngModel)]="orderstoinsert.iditem" >
+              <option *ngFor="let item of items" [selected]="orderstoinsert.iditem===item.id" value={{item.id}}>{{save(item)}} {{item.nome}}</option>
                 </select>
             </td>
             <td>
-                {{dataora()}}
+              {{dataora()}}
             </td>
             <td>
               <input placeholder="Prezzo" [(ngModel)]="orderstoinsert.prezzo">
             </td>
             <td colspan="2">
-                <h3>Devi prima effettuare l'ordine per personalizzarlo!</h3>
-             </td> 
-            <td>
-              <button (click)="insert(orderstoinsert)">Insert</button>
+              <button (click)="insert(orderstoinsert)" style="width:250px">Insert</button>
             </td>
             <td>
               <button (click)="clear()">Clear</button>
@@ -76,17 +69,14 @@
               {{order.prezzo}}
             </td>
             <td>
-            <input type="file" placeholder="Immagine" [(ngModel)]="orderstoinsert.prezzo"><!--Qui ci va l'upload-->
-          </td>
-          <td>
-              <input placeholder="QRLink" [(ngModel)]="orderstoinsert.prezzo"><!--Qui ci va itemtoinsert.qrlink-->
-          </td> 
+              <input  type="file" style="border: 0px;" (change)=onFileSelected($event) accept=".jpg" >
+            </td>
             <td>
-              <button (click)="update(order)">Custom</button>
+              <button type="button"(click)="upload(order.iditem)">Upload</button>
             </td>
 
-            <td>
-              <button (click)="select(order)">Read</button>
+            <td colspan="2">
+              <button style="width: 100px;" (click)="select(order)">Read</button>
             </td>
           </tr>
         </table>
@@ -97,18 +87,17 @@
                   ID
               </th>
               <th>
-                  Nome
+                  ID Client
               </th>
               <th>
-                 Cognome
+                  ID Item
               </th>
               <th>
                 Indirizzo
               </th>
-
               <th>
-    
-            </th>
+                
+              </th>
             </tr>
             <tr>
                 <td>
@@ -124,7 +113,7 @@
                   {{selectedc.indirizzo}}
               </td>
               <td>
-                  <button (click)="closeread()">Close</button>
+                  <button (click)="closereada()">Close</button>
               </td>
             </tr>
           </table>
@@ -132,28 +121,31 @@
         <table *ngIf="isselectedi">
             <tr>
               <th>
-                  ID
+                  Nome
               </th>
               <th>
-                  ID Client
+                  Descrizione
               </th>
               <th>
-                  ID Item
+                  Tipo
               </th>
               <th>
-                Data
+                Colore
               </th>
               <th>
-                Prezzo
+               Taglia
               </th>
               <th>
-    
+              </th>
+              <th>
+                QR Link
+              </th>
+              <th>
+                </th>
+                <th>
             </th>
             </tr>
             <tr>
-                <td>
-              {{selectedi.id }} 
-              </td>
                 <td>
                     {{selectedi.nome}}
               </td>
@@ -161,13 +153,27 @@
                   {{selectedi.descrizione}}
               </td>
               <td>
+                {{selectedi.tipo}}
+            </td>
+              <td>
                   {{selectedi.colore}}
               </td>
               <td>
                   {{selectedi.taglia}}
               </td>
               <td>
-                  <button (click)="closeread()">Close</button>
+                <!-- <div><img [src]="selectedi.immagine">{{selectedi.immagine}} </div> -->
+
+                <img class="zoom" [src]="'http://localhost:8080/'+selectedi.immagine" alt="img non disponibile"> 
+            </td>
+            <td>
+              <input placeholder="{{selectedi.link}}" [(ngModel)]="qrlink">
+          </td>
+          <td>
+            <button (click)="updatei(selectedi)">Save</button>
+          </td>
+              <td>
+                  <button (click)="closereadb()">Close</button>
               </td>
             </tr>
           </table>
@@ -190,12 +196,8 @@
                 Prezzo
               </th>
               <th>
-                Immagine
+    
             </th>
-            <th>
-                QRLink
-            </th>
-            <th></th>
             </tr>
             <tr>
                 <td>
@@ -213,15 +215,11 @@
               <td>
                   {{selected.prezzo}}
               </td>
+              
               <td>
-                  {{selectedi.immagine}}
+                  <button (click)="closereadc()">Close</button>
               </td>
-              <td>
-                  {{selectedi.link}}
-              </td>
-              <td>
-                  <button (click)="closeread()">Close</button>
-              </td>
+             
             </tr>
           </table>
       </div>

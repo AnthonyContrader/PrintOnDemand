@@ -13,4 +13,6 @@ export class ItemService extends AbstractService<ItemDTO> {
     super(http);
     this.type = 'item';
   }
+
+  
 }

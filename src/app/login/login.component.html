@@ -13,8 +13,9 @@
           <input class="form-control" type="password" id="pass" name="password" placeholder="Password" ngModel>
         </div>
         <button type="submit" (click)="login(f)">Login</button>
-        <button type="submit">Sign Up</button>
+        <button type="submit"(click)="signup(f)">Sign Up</button>
       </form>
+      <div *ngIf="isinsert">Registrazione Completata!</div>
     </div>
   </div>
 </div>

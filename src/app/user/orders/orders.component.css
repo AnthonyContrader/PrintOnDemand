@@ -21,12 +21,12 @@ td{
 }
 
 
-tr:nth-child(even) {
-	background-color: #ffdb99;
+tr {
+	background-color: lightcyan;
 }
 
 th {
-	background-color: darkorange;
+	background-color: darkcyan;
 	color: #ffffff;
 }
 
@@ -46,3 +46,23 @@ input:hover,  input:active, input:focus{
 button:hover{
     background-color: crimson;
 }
+
+img{
+	width: 70px;
+	height: 70px;
+}
+	.zoom {
+		transition: transform .4s; 
+		width: 70px;
+		height: 70px;
+		margin: 0 auto;
+	  }
+
+	  .zoom:hover 
+	  {
+		z-index:1;
+		  transform: scale(6.04) translate(30px,10px); 
+		
+		}
+
+	

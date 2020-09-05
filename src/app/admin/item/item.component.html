@@ -1,8 +1,9 @@
 <div class="container">
   <div class="row mt-5">
-   
-    <div class="col-md-10">
-      <table>
+      <div class="col-sl">
+      </div>
+    <div class="col-sm-100">
+      <table class="table-responsive-xl">
         <tr>
           <th>
             Nome
@@ -19,9 +20,11 @@
           <th>
             Taglia
           </th>
-          <th>
+          
+          <th >
             Immagine
           </th>
+          
           <th>
             Link
           </th>
@@ -52,10 +55,10 @@
             <input placeholder="Taglia" [(ngModel)]="itemtoinsert.taglia">
           </td>
           <td>
-            <input placeholder="Immagine" [(ngModel)]="itemtoinsert.immagine">
+            
           </td>
           <td>
-            <input placeholder="Link" [(ngModel)]="itemtoinsert.link">
+            
           </td>
           <td>
             <button (click)="insert(itemtoinsert)">Insert</button>
@@ -83,10 +86,14 @@
             <input [(ngModel)]="item.taglia">
           </td>
           <td>
-            <input [(ngModel)]="item.immagine">
+              <textarea readonly rows="3"  cols="20" style="border-style: none; 
+              border-color: Transparent; 
+              overflow: auto; resize:none; font-size:10px;  background: transparent;">{{cutstring(item.immagine)}}</textarea>
           </td>
           <td>
-            <input [(ngModel)]="item.link">
+              <textarea readonly rows="2" cols="15" style="border-style: none; 
+              border-color: Transparent; 
+              overflow: auto; resize:none; font-size:12px;  background: transparent;">{{cutstring(item.link)}}</textarea>
           </td>
           <td>
             <button (click)="update(item)">Save</button>
