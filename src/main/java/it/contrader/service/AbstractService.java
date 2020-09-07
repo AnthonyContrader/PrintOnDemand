@@ -1,53 +1,48 @@
 package it.contrader.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.repository.CrudRepository;
-
+import org.springframework.stereotype.Service;
+import it.contrader.service.ServiceDTO;
 import it.contrader.converter.Converter;
 
+@Service
+public abstract class AbstractService<Entity, DTO> implements ServiceDTO<DTO> {
 
-/**
- * Questa classe astratta implementa tutti i metodi CRUD firmati in ServiceDTO.
- * Il converter agisce due volte nei metodi  insert e update per avere sia come input che come output
- * un oggetto DTO.
- * 
- * @author Vittorio Valent & Girolamo Murdaca
- *
- * @param <Entity>
- * @param <DTO>
- * 
- * @see ServiceDTO
- */
-public abstract class AbstractService<Entity,DTO> implements ServiceDTO<DTO> {
-	
 	@Autowired
-	protected CrudRepository<Entity,Long> repository;
+	protected CrudRepository<Entity, Long> crudRepository;
 	@Autowired
-	protected Converter<Entity,DTO> converter;
+	protected Converter<Entity, DTO> converter;
 	
-	@Override
-	public DTO insert(DTO dto) {
-		return converter.toDTO(repository.save(converter.toEntity(dto)));
+
+	public AbstractService() {
 	}
 
 	@Override
-	public Iterable<DTO> getAll() {
-		return converter.toDTOList(repository.findAll());
+	public DTO insert(DTO dto) {
+		return converter.toDTO(crudRepository.save(converter.toEntity(dto)));
+	}
+
+	@Override
+	public List<DTO> getAll() {
+		return converter.toDTOList((crudRepository.findAll()));
 	}
 
 	@Override
 	public DTO read(long id) {
-		return converter.toDTO(repository.findById(id).get());
+		return converter.toDTO(crudRepository.findById(id).get());
 	}
 
 	@Override
 	public DTO update(DTO dto) {
-		return converter.toDTO(repository.save(converter.toEntity(dto)));
+		return converter.toDTO(crudRepository.save(converter.toEntity(dto)));
 	}
 
 	@Override
 	public void delete(long id) {
-		repository.deleteById(id);
+		crudRepository.deleteById(id);
 	}
+
 }

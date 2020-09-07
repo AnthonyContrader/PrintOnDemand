@@ -3,19 +3,17 @@ package it.contrader.converter;
 import org.springframework.stereotype.Component;
 
 import it.contrader.dto.ClientDTO;
-
 import it.contrader.model.Client;
 
-
 @Component
-public class ClientConverter extends AbstractConverter<Client,ClientDTO>
-{
-
+public class ClientConverter extends AbstractConverter<Client, ClientDTO> {
+	
+	private UserConverter userConverter;
 	@Override
 	public Client toEntity(ClientDTO clientDTO) {
 		Client client = null;
 		if (clientDTO != null) {
-			client = new Client(clientDTO.getUserID() ,clientDTO.getNome(),clientDTO.getCognome(),clientDTO.getIndirizzo(),clientDTO.getId());			
+			client = new Client (clientDTO.getUser(), clientDTO.getNome(), clientDTO.getCognome(), clientDTO.getIndirizzo(), clientDTO.getId());
 		}
 		return client;
 	}
@@ -24,8 +22,8 @@ public class ClientConverter extends AbstractConverter<Client,ClientDTO>
 	public ClientDTO toDTO(Client client) {
 		ClientDTO clientDTO = null;
 		if (client != null) {
-			clientDTO = new ClientDTO(client.getUserID(),client.getNome(),client.getCognome(),client.getIndirizzo(),client.getId());
-			
+			clientDTO = new ClientDTO(client.getUser(), client.getNome(), client.getCognome(), client.getIndirizzo(), client.getId());
+
 		}
 		return clientDTO;
 	}
