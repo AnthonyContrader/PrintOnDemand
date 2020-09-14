@@ -13,7 +13,8 @@ import{ HttpClient, HttpEventType} from '@angular/common/http';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-
+  base64Data: any;
+  imageBlobUrl: string | null = null;
   isselected: boolean=false;
   isselectedi: boolean=false;
   isselectedc: boolean=false;
@@ -35,7 +36,7 @@ export class OrdersComponent implements OnInit {
   selectedfile: File=null;
   itemsorders:ItemDTO[]=[];
   qrlink:string;
- 
+  image: any;
  
 
   constructor(private service: ItemService, private servicec: ClientService , private http:HttpClient) { }
@@ -54,33 +55,33 @@ export class OrdersComponent implements OnInit {
     this.selectedfile=<File>event.target.files[0];
   }
 
-  upload(idselect:number)
+  upload(orderselect)
   {
     let tmpitem:ItemDTO;
     this.dataoraupload();
 
     const fd=new FormData;
     fd.append('img',this.selectedfile,this.selectedfile.name);
-    this.http.post('http://localhost:8080/order/upload',fd, {reportProgress:true, observe:'events'}).subscribe(event =>{
+    this.service.upload(fd)/*this.http.('http://localhost:8080/api/order/upload',fd, {reportProgress:true, observe:'events'})*/.subscribe(path =>{
+      orderselect.immagine= ("\immaginisalvate") + this.sfdata +"\\"+ this.selectedfile.name;
+      console.log(orderselect);
+
+      this.service.update(orderselect).subscribe();
+      console.log(event+ " " + orderselect.id);/*
       if(event.type===HttpEventType.UploadProgress) {
         console.log('UploadProgress' + Math.round(event.loaded / event.total * 100 ) +'%');
       }else if(event.type===HttpEventType.Response) 
       {
+
+
         this.service.getAll().subscribe((t: ItemDTO[])=>{
-          for(let ordtmp of t) 
-          {
-            if(ordtmp.id===idselect) tmpitem=ordtmp;
-          }
         },undefined,()=>{
 
-          tmpitem.immagine= ("\\immaginisalvate") + this.sfdata +"\\"+ this.selectedfile.name;
-          this.service.update(tmpitem).subscribe();
-          console.log(event+ " " + tmpitem.id);
            });
 
         
       
-      }
+      }*/
     });
     
   }
@@ -136,7 +137,7 @@ export class OrdersComponent implements OnInit {
 
 
 
-/*
+ /*
     this.servicei.getAll().subscribe((items: ItemDTO[]) => {
       for(let it of items) {
         if((it.immagine==="" || it.immagine===null ) && (it.link==="" || it.immagine===null)) this.length=this.items.push(it);
@@ -162,7 +163,6 @@ export class OrdersComponent implements OnInit {
     item.link=this.qrlink;
     this.service.update(item).subscribe(() => {});
   }
-
   insert() {
       let idtemp=this.orderstoinsert.id;
       this.orderstoinsert.id=null;
@@ -205,9 +205,10 @@ export class OrdersComponent implements OnInit {
   closereadc() {
     this.isselected=false;
   }
-  readi(reviews: number){
+  readi(reviews: number, img){
     this.service.read(reviews).subscribe(sel=>this.selectedi=sel);
     this.isselectedi=true;
+    this.getImgHtml(img);
     return this.selectedi;
   }
   readc(reviews: number){
@@ -216,6 +217,12 @@ export class OrdersComponent implements OnInit {
     return this.selectedi;
   }
 
+getImgHtml(img){
+  this.service.getImage(img).subscribe((blob:any)=>{
+  let objectURL = URL.createObjectURL(blob);       
+  return objectURL;
+    });
+  }
 
   /*allOrders()  {
     this.service.getAll().subscribe(orders => {

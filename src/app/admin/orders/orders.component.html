@@ -60,7 +60,7 @@
             </td>
             <td>
                 
-                <button (click)="readi(order.id);" style="width:50px">{{order.id}} </button>
+                <button (click)="readi(order.id,order.immagine);" style="width:50px">{{order.id}} </button>
             </td>
             <td>
               {{order.data}}
@@ -72,7 +72,7 @@
               <input  type="file" style="border: 0px;" (change)=onFileSelected($event) accept=".jpg" >
             </td>
             <td>
-              <button type="button"(click)="upload(order.id)">Upload</button>
+              <button type="button"(click)="upload(order)">Upload</button>
             </td>
 
             <td colspan="2">
@@ -164,7 +164,7 @@
               <td>
                 <!-- <div><img [src]="selectedi.immagine">{{selectedi.immagine}} </div> -->
 
-                <img class="zoom" [src]="'http://localhost:8080/'+selectedi.immagine" alt="img non disponibile"> 
+                <img class="zoom" [src]="'http://localhost:8082/'+selectedi.immagine" alt="img non disponibile"> 
             </td>
             <td>
               <input placeholder="{{selectedi.link}}" [(ngModel)]="qrlink">
