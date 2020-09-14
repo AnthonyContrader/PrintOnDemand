@@ -1,0 +1,168 @@
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-sl">
+      </div>
+    <div class="col-sm-100">
+      <table class="table-responsive-xl">
+        <tr>
+          <th>
+            Nome
+          </th>
+          <th>
+            Descrizione
+          </th>
+          <th>
+              <input type="text" placeholder="Tipo" [(ngModel)]="searchVal" (ngModelChange)='checkSearchVal()' >
+          </th>
+          <th>
+            Colore
+          </th>
+          <th>
+            Taglia
+          </th>
+          
+          <th >
+            Immagine
+          </th>
+          
+          <th>
+            Link
+          </th>
+          <th>
+            Insert/Save
+          </th>
+          <th>
+            Delete/Clear
+          </th>
+          <th>
+            Read
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input placeholder="Nome" [(ngModel)]="itemtoinsert.nome">
+          </td>
+          <td>
+            <input placeholder="Descrizione" [(ngModel)]="itemtoinsert.descrizione">
+          </td>
+          <td>
+            <input placeholder="Tipo" [(ngModel)]="itemtoinsert.tipo">
+          </td>
+          <td>
+            <input placeholder="Colore" [(ngModel)]="itemtoinsert.colore">
+          </td>
+          <td>
+            <input placeholder="Taglia" [(ngModel)]="itemtoinsert.taglia">
+          </td>
+          <td>
+            
+          </td>
+          <td>
+            
+          </td>
+          <td>
+            <button (click)="insert(itemtoinsert)">Insert</button>
+          </td>
+          <td>
+            <button (click)="clear()">Clear</button>
+          </td>
+          <td>
+          </td>
+          </tr>
+        <tr *ngFor="let item of result">
+            <td>
+                <input [(ngModel)]="item.nome">
+          </td>
+          <td>
+            <input [(ngModel)]="item.descrizione">
+          </td>
+          <td>
+            <input [(ngModel)]="item.tipo">
+          </td>
+          <td>
+            <input [(ngModel)]="item.colore">
+          </td>
+          <td>
+            <input [(ngModel)]="item.taglia">
+          </td>
+          <td>
+              <textarea readonly rows="3"  cols="20" style="border-style: none; 
+              border-color: Transparent; 
+              overflow: auto; resize:none; font-size:10px;  background: transparent;">{{cutstring(item.immagine)}}</textarea>
+          </td>
+          <td>
+              <textarea readonly rows="2" cols="15" style="border-style: none; 
+              border-color: Transparent; 
+              overflow: auto; resize:none; font-size:12px;  background: transparent;">{{cutstring(item.link)}}</textarea>
+          </td>
+          <td>
+            <button (click)="update(item)">Save</button>
+          </td>
+          <td>
+            <button (click)="delete(item)">Delete</button>
+          </td>
+          <td>
+            <button (click)="select(item)">Read</button>
+          </td>
+        </tr>
+      </table>
+    
+      <table *ngIf="isselected">
+        <tr>
+          <th>
+            Nome
+          </th>
+          <th>
+            Descrizione
+          </th>
+          <th>
+            Tipo
+          </th>
+          <th>
+            Colore
+          </th>
+          <th>
+            Taglia
+          </th>
+          <th>
+            Immagine
+          </th>
+          <th>
+            QR Link
+          </th>
+          <th>
+
+        </th>
+        </tr>
+        <tr>
+            <td>
+          {{selected.nome}} 
+          </td>
+            <td>
+                {{selected.descrizione}}
+          </td>
+          <td>
+              {{selected.tipo}}
+          </td>
+          <td>
+              {{selected.colore}}
+          </td>
+          <td>
+              {{selected.taglia}}
+          </td>
+          <td>
+            {{selected.immagine}} 
+            </td>
+            <td>
+              {{selected.link}} 
+              </td>
+          <td>
+              <button (click)="closeread()">Close</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+  
+  </div>
+</div>

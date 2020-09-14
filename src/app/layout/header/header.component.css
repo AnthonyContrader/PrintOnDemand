@@ -1,6 +1,9 @@
 
 #header{
-    background-color: darkorange;
+    background-image: url("../../../assets/sfondo.jpg");
+    background-size:cover;
+    background-color: darkcyan;
+    height:100px;
 }
 .searchContainer {
     margin-top: 10px;
@@ -33,8 +36,8 @@
       height: 70%;
       margin-top:7px;
     background: white;
-    border: 2px solid darkorange;
-    color: darkorange;
+    border: 2px solid darkcyan;
+    color: darkcyan;
     border-radius: 15px;
   
   }

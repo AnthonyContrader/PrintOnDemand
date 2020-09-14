@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginDTO } from 'src/dto/logindto';
+import { UserDTO } from 'src/dto/userdto';
 import { NgForm } from '@angular/forms';
 import { UserService } from 'src/service/user.service';
 import { Router } from '@angular/router';
@@ -12,10 +13,14 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginDTO: LoginDTO;
+  userDTO:UserDTO;
+  isinsert:boolean;
+
 
   constructor(private service: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.isinsert=false;
   }
 
   login(f: NgForm): void {
@@ -41,4 +46,20 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+
+  signup(f: NgForm): void 
+  {
+    this.userDTO=new UserDTO();
+    this.userDTO.username=f.value.username; 
+    this.userDTO.password=f.value.password;
+    this.userDTO.usertype="USER";
+
+    this.service.insert(this.userDTO).subscribe(()=>{
+
+      this.isinsert=true;
+
+    });
+  }
+    
 }
