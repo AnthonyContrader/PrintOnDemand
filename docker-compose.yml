@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  project1:
+    image: project1
+    build:
+      context: Project1
+      dockerfile: Dockerfile
+    depends_on:
+        - sqldata
+    ports:
+        - "65166:80" #only for testing
+
+  project2:
+    image: project2
+    build:
+      context: Project2
+      dockerfile: Dockerfile
+    depends_on:
+        - sqldata
+        - project1
+    ports:
+        - "65167:80" #only for testing
+
+  sqldata:
+        image: microsoft/mssql-server-linux
+        environment:
+          - SA_PASSWORD=Contrader2020
+          - ACCEPT_EULA=Y
+        ports:
+          - "5434:1433"
