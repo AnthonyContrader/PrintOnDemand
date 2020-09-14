@@ -32,13 +32,13 @@ input::placeholder{
 .form-control{
 border: none;
 background-color: darkcyan;
+
 color: white;
 border-bottom: 1px solid white;
 }
 
 .login{
 border: none;
-
 color: white;
 border: 1px solid white;
 border-radius: 2px;

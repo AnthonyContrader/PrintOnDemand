@@ -38,8 +38,6 @@ export abstract class AbstractService<DTO> implements Service<DTO> {
     update(dto: DTO): Observable<DTO> {
         return this.http.put<DTO>('http://localhost:' + this.port + '/' + this.type + '/update', dto);
 
-        
-
     }
 
 }
