@@ -8,8 +8,8 @@ using POD.Models.DBModels;
 
 namespace POD.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    //[ApiController]
+    //[Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private sampledbContext _context;

@@ -11,12 +11,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using POD.Models.DBModels;
 
 namespace POD
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "Policy1";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,9 +30,18 @@ namespace POD
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
+            services.AddControllers();
             services.AddDbContext<sampledbContext>(options => options.UseMySql(Configuration.GetConnectionString("sampledbContext")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Policy1",
+                    builder =>
+                    {
+                        builder.WithOrigins( "http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,11 +57,12 @@ namespace POD
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

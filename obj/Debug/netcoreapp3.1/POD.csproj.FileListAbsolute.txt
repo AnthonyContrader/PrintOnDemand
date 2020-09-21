@@ -40,5 +40,7 @@ D:\.Net\POD\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
 D:\.Net\POD\obj\Debug\netcoreapp3.1\POD.dll
 D:\.Net\POD\obj\Debug\netcoreapp3.1\POD.pdb
 D:\.Net\POD\obj\Debug\netcoreapp3.1\POD.genruntimeconfig.cache
+D:\.Net\POD\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\.Net\POD\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 D:\.Net\POD\obj\Debug\netcoreapp3.1\POD.csproj.CoreCompileInputs.cache
 D:\.Net\POD\obj\Debug\netcoreapp3.1\POD.MvcApplicationPartsAssemblyInfo.cache
