@@ -45,7 +45,9 @@ namespace POD.Controllers
         [HttpPost]
         public void Post([FromBody] Utente value)
         {
+
             _context.Utente.Add(value);
+            _context.SaveChanges();
         }
 
         // PUT api/<UtentiController>/5

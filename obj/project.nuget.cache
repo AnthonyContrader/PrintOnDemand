@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/UuKVIZ8lptSbDgjiCiyuBT+M6xhSdJR/kfOm0UJ3OjeQ9dAmJEaGvBr+dKe2knxaOMUNtkzWA00kIBD1oVT3A==",
+  "dgSpecHash": "4BDwD7c2WOH/+5tjgKWM1xidsgxoDXuq+JNY3j3Clcw+4Jh1KBq+xdacTJLHhQydMMjPdjYHEATTK9syTsj7QA==",
   "success": true,
   "projectFilePath": "D:\\.Net\\POD\\POD.csproj",
   "expectedPackageFiles": [
@@ -52,7 +52,7 @@
     "C:\\Users\\Fira\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Fira\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\Fira\\.nuget\\packages\\mysqlconnector\\0.69.9\\mysqlconnector.0.69.9.nupkg.sha512",
-    "C:\\Users\\Fira\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
+    "C:\\Users\\Fira\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\Fira\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\3.2.0\\pomelo.entityframeworkcore.mysql.3.2.0.nupkg.sha512",
     "C:\\Users\\Fira\\.nuget\\packages\\pomelo.jsonobject\\2.2.1\\pomelo.jsonobject.2.2.1.nupkg.sha512",
     "C:\\Users\\Fira\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",

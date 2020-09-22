@@ -105,7 +105,7 @@ namespace POD.Models.DBModels
             {
                 entity.ToTable("cliente");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Cognome)
                     .HasColumnName("cognome")
