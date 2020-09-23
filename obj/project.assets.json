@@ -5276,11 +5276,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\.Net\\POD\\POD.csproj",
+      "projectUniqueName": "D:\\POD\\PrintOnDemand\\POD.csproj",
       "projectName": "POD",
-      "projectPath": "D:\\.Net\\POD\\POD.csproj",
+      "projectPath": "D:\\POD\\PrintOnDemand\\POD.csproj",
       "packagesPath": "C:\\Users\\Fira\\.nuget\\packages\\",
-      "outputPath": "D:\\.Net\\POD\\obj\\",
+      "outputPath": "D:\\POD\\PrintOnDemand\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Fira\\AppData\\Roaming\\NuGet\\NuGet.Config",

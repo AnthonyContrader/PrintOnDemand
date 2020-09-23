@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4BDwD7c2WOH/+5tjgKWM1xidsgxoDXuq+JNY3j3Clcw+4Jh1KBq+xdacTJLHhQydMMjPdjYHEATTK9syTsj7QA==",
+  "dgSpecHash": "+19LRc1Y4ogHWm8EERucheuw2dzo+gW6HPm85b210l5VtTPD+fzgEgOl9fo3TdDkwPn8PsecgSJ/3ktN2O0ESQ==",
   "success": true,
-  "projectFilePath": "D:\\.Net\\POD\\POD.csproj",
+  "projectFilePath": "D:\\POD\\PrintOnDemand\\POD.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Fira\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Fira\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
