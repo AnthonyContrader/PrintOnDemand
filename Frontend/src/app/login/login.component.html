@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7">
+      <img src="../../assets/logo.svg" alt="logo">
+    </div>
+    <div class="col-md-5">
+      <form #f="ngForm">
+        <h1>Inserisci Username e Password</h1>
+        <br>
+        <h1>Non sei Registrato? SIGN IN!</h1>
+        <div class="form-group">
+          <input class="form-control" type="text" id="user" name="username" placeholder="Username" ngModel>
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="password" id="pass" name="password" placeholder="Password" ngModel>
+        </div>
+        <button type="submit" (click)="login(f)">Login</button>
+        <button type="submit"(click)="signup(f)">Sign Up</button>
+      </form>
+      <div *ngIf="isinsert" style="color: aliceblue" >Registrazione Completata!</div>
+    </div> 
+  </div>
+</div>
